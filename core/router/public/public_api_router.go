@@ -4,13 +4,13 @@ import (
 	"net/http"
 
 	log "github.com/Sirupsen/logrus"
-	mygrpc "github.com/intrajasa/intrajasa-merchant-api-gateway/core/grpc"
-	pb "github.com/intrajasa/intrajasa-merchant-api-gateway/core/grpc/services"
-	ws "github.com/intrajasa/intrajasa-merchant-api-gateway/core/socketio"
+	mygrpc "intrajasa-merchant-api-gateway/core/grpc"
+	pb "intrajasa-merchant-api-gateway/core/grpc/services"
+	ws "intrajasa-merchant-api-gateway/core/socketio"
 
 	"github.com/gin-gonic/gin"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/api/users"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/utils/consts"
+	"intrajasa-merchant-api-gateway/core/api/users"
+	"intrajasa-merchant-api-gateway/core/utils/consts"
 )
 
 var (

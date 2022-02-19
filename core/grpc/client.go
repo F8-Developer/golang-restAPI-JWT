@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	pb "github.com/intrajasa/intrajasa-merchant-api-gateway/core/grpc/services"
+	pb "intrajasa-merchant-api-gateway/core/grpc/services"
 
 	"google.golang.org/grpc"
 )

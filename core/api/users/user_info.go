@@ -5,9 +5,9 @@ import (
 	"time"
 
 	"github.com/mitchellh/mapstructure"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/utils"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/utils/consts"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/utils/db"
+	"intrajasa-merchant-api-gateway/core/utils"
+	"intrajasa-merchant-api-gateway/core/utils/consts"
+	"intrajasa-merchant-api-gateway/core/utils/db"
 	"gopkg.in/mgo.v2/bson"
 )
 

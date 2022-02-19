@@ -2,7 +2,7 @@ package db
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/utils/consts"
+	"intrajasa-merchant-api-gateway/core/utils/consts"
 	"gopkg.in/mgo.v2"
 )
 

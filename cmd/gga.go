@@ -19,8 +19,8 @@ type newProject struct{}
 
 // download url by different os type(Linux/Windows).
 const (
-	WINURL = "https://github.com/intrajasa/intrajasa-merchant-api-gateway/files/2365358/apigateway-template.zip"
-	LUXURL = "https://github.com/intrajasa/intrajasa-merchant-api-gateway/files/2365349/apigateway-template.tar.gz"
+	WINURL = "https://intrajasa-merchant-api-gateway/files/2365358/apigateway-template.zip"
+	LUXURL = "https://intrajasa-merchant-api-gateway/files/2365349/apigateway-template.tar.gz"
 )
 
 var requestURL string

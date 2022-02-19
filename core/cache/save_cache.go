@@ -2,7 +2,7 @@ package cache
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/utils/redis"
+	"intrajasa-merchant-api-gateway/core/utils/redis"
 )
 
 // SaveLoginSession : save login session here.

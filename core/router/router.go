@@ -5,9 +5,9 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/router/private"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/router/public"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/middleware"
+	"intrajasa-merchant-api-gateway/core/router/private"
+	"intrajasa-merchant-api-gateway/core/router/public"
+	"intrajasa-merchant-api-gateway/middleware"
 )
 
 // Varible define to here

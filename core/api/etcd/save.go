@@ -2,7 +2,7 @@ package etcd
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"github.com/intrajasa/intrajasa-merchant-api-gateway/core/utils/etcd"
+	"intrajasa-merchant-api-gateway/core/utils/etcd"
 	"golang.org/x/net/context"
 )
 

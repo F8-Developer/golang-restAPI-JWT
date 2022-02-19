@@ -21,7 +21,7 @@ Its clone form [nightlegend/apigateway](https://github.com/nightlegend/apigatewa
 ```sh
 git clone git@github.com:intrajasaid/intrajasa-merchant-api-gateway.git
 go get github.com/kardianos/govendor
-cd $GOPATH/src/github.com/intrajasaid/intrajasa-merchant-api-gateway
+
 export GO111MODULE=on
 go get
 ```
@@ -48,7 +48,7 @@ If running normally, you can access <a href="http://localhost:8080">http://local
         "flag"
         "os"
         log "github.com/Sirupsen/logrus"
-        "github.com/intrajasaid/intrajasa-merchant-api-gateway/core/router"
+        "intrajasa-merchant-api-gateway/core/router"
     )
 
     var (

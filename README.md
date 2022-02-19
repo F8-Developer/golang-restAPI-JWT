@@ -1,9 +1,8 @@
-# Api Gateway: Try a new way by golang
+# Intrajasa [Merchant Api Gateway]: build with golang and gin
 
-[![Build Status](https://travis-ci.org/nightlegend/apigateway.svg?branch=dev1.0)](https://travis-ci.org/nightlegend/apigateway) [![codecov](https://codecov.io/gh/nightlegend/apigateway/branch/dev1.0/graph/badge.svg)](https://codecov.io/gh/nightlegend/apigateway) [![Go Report Card](https://goreportcard.com/badge/github.com/nightlegend/apigateway)](https://goreportcard.com/report/github.com/nightlegend/apigateway) [![Gitter](https://badges.gitter.im/nightlegend/apigateway.svg)](https://gitter.im/nightlegend/apigateway?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+Its clone form [nightlegend/apigateway](https://golang.org/). It features a simple and better performance, and customize with requirements needed.
 
-Apigateway is a api-gateway server demo written in [golang](https://golang.org/) and [go-gin](https://gin-gonic.github.io/gin/). It features a simple and better performance, you can faster build your api server by this templete. If you need fast build a api gateway server, you will love Apigateway.
-
+<br>
 
 <h1>Design</h1>
 
@@ -13,16 +12,16 @@ Apigateway is a api-gateway server demo written in [golang](https://golang.org/)
 
 <h2>Prepare step(optional)</h2>
 
->start mongo db in your localhost, and update your mongodb info in /conf/app.conf.yml.You also can select mysql.
+>start mongo db in your localhost, and update your mongodb info in /conf/app.conf.yml. You also can select mysql.
 
 
 <h2>Start APIGATEWAY</h2>
 
 * Init workdir
 ```sh
-git clone https://github.com/nightlegend/apigateway.git
+git clone git@github.com:intrajasaid/intrajasa-merchant-api-gateway.git
 go get github.com/kardianos/govendor
-cd $GOPATH/src/github.com/nightlegend/apigateway
+cd $GOPATH/src/github.com/intrajasaid/intrajasa-merchant-api-gateway
 export GO111MODULE=on
 go get
 ```
@@ -36,7 +35,7 @@ go run server.go -env development
 ```
 
 
-If running normally, you can access<a href="http://localhost:8080">http://localhost:8080</a>
+If running normally, you can access <a href="http://localhost:8080">http://localhost:8080</a>
 
 **Application details**
 
@@ -49,7 +48,7 @@ If running normally, you can access<a href="http://localhost:8080">http://localh
         "flag"
         "os"
         log "github.com/Sirupsen/logrus"
-        "github.com/nightlegend/apigateway/core/router"
+        "github.com/intrajasaid/intrajasa-merchant-api-gateway/core/router"
     )
 
     var (
@@ -173,7 +172,7 @@ If running normally, you can access<a href="http://localhost:8080">http://localh
 
 1. Build runnable file on your OS.
    ```sh
-   cd apigateway/cmd
+   cd intrajasa-merchant-api-gateway/cmd
    go build gga.go
    ```
 2. Usage about gga.

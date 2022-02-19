@@ -20,10 +20,6 @@ Its clone form [nightlegend/apigateway](https://github.com/nightlegend/apigatewa
 * Init workdir
 ```sh
 git clone git@github.com:intrajasaid/intrajasa-merchant-api-gateway.git
-go get github.com/kardianos/govendor
-
-export GO111MODULE=on
-go get
 ```
 
 * Start APIGATEWAY

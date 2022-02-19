@@ -1,6 +1,6 @@
-# Intrajasa [Merchant Api Gateway]: build with golang and gin
+# Intrajasa [Merchant Api Gateway]:
 
-Its clone form [nightlegend/apigateway](https://golang.org/). It features a simple and better performance, and customize with requirements needed.
+Its clone form [nightlegend/apigateway](https://github.com/nightlegend/apigateway). Build with golang and gin. It features a simple and better performance, and customize with requirements needed.
 
 <br>
 
@@ -263,3 +263,8 @@ If you need a [SOCKET-SERVER](https://github.com/nightlegend/hi), It`s can help 
 
 If you interest grpc, I am happy to give a sample to you, [GRPC-GO](https://github.com/nightlegend/grpc-server-go), hope you love it, thanks.
 
+---
+## Authors
+
+* **Ax7-cmd** - *Initial work* - [Ax7](https://github.com/Ax7-cmd).
+* *Backend dev*

@@ -2,38 +2,101 @@ package public
 
 import (
 	"net/http"
-
-	log "github.com/Sirupsen/logrus"
-	mygrpc "intrajasa-merchant-api-gateway/core/grpc"
-	pb "intrajasa-merchant-api-gateway/core/grpc/services"
-	ws "intrajasa-merchant-api-gateway/core/socketio"
-
 	"github.com/gin-gonic/gin"
+
+	"github.com/go-playground/locales/en"
+	ut "github.com/go-playground/universal-translator"
+	en_translations "github.com/go-playground/validator/v10/translations/en"
+
+	"intrajasa-merchant-api-gateway/core/structs"
+	"intrajasa-merchant-api-gateway/core/validator"
 	"intrajasa-merchant-api-gateway/core/api/users"
 	"intrajasa-merchant-api-gateway/core/utils/consts"
 )
 
 var (
-	uis  users.UserInfoService
+	gtr structs.GetTokenRequest
+	gvr structs.GenerateVaRequest
+	uis users.UserInfoService
 	flag int
 )
 
 // APIRouter define router from here, you can add new api about your new services.
 func APIRouter(router *gin.Engine) {
-	log.Info("start init public router.......")
-	/*
-		// TO-DO: cache store solution
-		store, err := redis.NewStore(10, "tcp", "localhost:6379", "", []byte("secret"))
-		if err != nil {
-			return
-		}
-		router.Use(sessions.Sessions("mysession", store))
-
-	*/
+	// set validator
+	validate := validator.InitValidator()
+	english := en.New()
+	uni := ut.New(english, english)
+	trans, _ := uni.GetTranslator("en")
+	validate.RegisterValidation("is-awesome", validator.ValidateMyVal)
+	_ = en_translations.RegisterDefaultTranslations(validate, trans)
+	// end set validator
 
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": "welcome to apigateway, you can find you want here!!!", "userInfo": "Hello World!!!"})
 	})
+
+	// INTRAJASA DEFAULT ROUTE
+	router.POST("/vaonline/rest/json/gettoken", func(c *gin.Context) {
+		// using BindJson method to serialize body with struct
+		if err := c.BindJSON(&gtr); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": err.Error(),
+			})
+			gtr = structs.GetTokenRequest{}
+			return
+		}
+		if err := validate.Struct(gtr); err != nil {
+			errs := validator.TranslateError(err, trans)
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": errs,
+			})
+			gtr = structs.GetTokenRequest{}
+			return
+		}
+		c.JSON(http.StatusOK,&gtr)
+		gtr = structs.GetTokenRequest{}
+	})
+
+	router.POST("/vaonline/rest/json/generateva", func(c *gin.Context) {
+		// using BindJson method to serialize body with struct
+		if err := c.BindJSON(&gvr); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": err.Error(),
+			})
+			gvr = structs.GenerateVaRequest{}
+			return
+		}
+		if err := validate.Struct(gvr); err != nil {
+			errs := validator.ToErrResponse(err)
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": errs,
+			})
+			gvr = structs.GenerateVaRequest{}
+			return
+		}
+		c.JSON(http.StatusOK,&gvr)
+		gvr = structs.GenerateVaRequest{}
+	})
+
+	router.POST("/vaonline/rest/json/getstatus", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"merchantRefCode": "JS008sKs", 
+			"merchantId": "001", 
+			"totalAmount": "200000.0", 
+			"vaNumber": "8228006200100634 ", 
+			"paymentStatus": "1", 
+			"responseCode": "200", 
+			"responseMsg": "Success"})
+	})
+
+	router.POST("/vaonline/rest/json/disableVA", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"responseCode": "200", "responseMsg": "Success"})
+	})
+
+	router.POST("/vaonline/rest/json/updateVA", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"responseCode": "200", "responseMsg": "Success"})
+	})
+	// END INTRAJASA DEFAULT ROUTE
 
 	router.POST("/api/users/login", func(c *gin.Context) {
 		c.BindJSON(&uis)
@@ -73,36 +136,4 @@ func APIRouter(router *gin.Engine) {
 			c.JSON(http.StatusExpectationFailed, gin.H{"errorMessage": "Rigster failed "})
 		}
 	})
-
-	router.POST("/api/users/update", func(c *gin.Context) {
-		c.BindJSON(&uis)
-		if uis.UpdateUserInfo() {
-			c.JSON(http.StatusOK, gin.H{"statusCode": http.StatusOK, "message": uis.USERNAME + ",you have update information successfully!"})
-		} else {
-			c.JSON(http.StatusExpectationFailed, gin.H{"errorMessage": "update information failed, please contract admin help..."})
-		}
-	})
-
-	router.GET("/api/users/queryAll", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"statusCode": http.StatusOK, "message": "Query done, check console", "userList": uis.QueryAllAccountInfo()})
-	})
-
-	// export a api for call grpc methods
-	router.GET("/api/grpc/demo", func(c *gin.Context) {
-		conn, client, err := mygrpc.APIClient()
-		defer conn.Close()
-		if err != nil {
-			c.JSON(http.StatusOK, gin.H{"message": err})
-		}
-		resp := mygrpc.Testing(client, &pb.Request{Id: 1, Msg: "grpc call testinng"})
-		c.JSON(http.StatusOK, gin.H{"resp": resp})
-	})
-
-	// web socket expose
-	router.GET("/ws", func(c *gin.Context) {
-		ws.WShandler(c.Writer, c.Request)
-	})
-
-	log.Info("complete init public router.......")
-
 }

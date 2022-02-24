@@ -38,6 +38,18 @@ github.com/gin-gonic/gin
 github.com/gin-gonic/gin/binding
 github.com/gin-gonic/gin/json
 github.com/gin-gonic/gin/render
+# github.com/go-playground/locales v0.14.0
+## explicit; go 1.13
+github.com/go-playground/locales
+github.com/go-playground/locales/currency
+github.com/go-playground/locales/en
+# github.com/go-playground/universal-translator v0.18.0
+## explicit; go 1.13
+github.com/go-playground/universal-translator
+# github.com/go-playground/validator/v10 v10.10.0
+## explicit; go 1.13
+github.com/go-playground/validator/v10
+github.com/go-playground/validator/v10/translations/en
 # github.com/go-redis/redis v6.10.2+incompatible
 ## explicit
 github.com/go-redis/redis
@@ -88,6 +100,9 @@ github.com/inconshreveable/mousetrap
 github.com/json-iterator/go
 # github.com/kardianos/govendor v1.0.9
 ## explicit
+# github.com/leodido/go-urn v1.2.1
+## explicit; go 1.13
+github.com/leodido/go-urn
 # github.com/manucorporat/sse v0.0.0-20160126180136-ee05b128a739
 ## explicit
 # github.com/mattn/go-isatty v0.0.4
@@ -118,6 +133,9 @@ github.com/spf13/pflag
 # github.com/ugorji/go v0.0.0-20170312112114-708a42d24682
 ## explicit
 github.com/ugorji/go/codec
+# golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
+## explicit; go 1.17
+golang.org/x/crypto/sha3
 # golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
 ## explicit; go 1.17
 golang.org/x/net/context
@@ -129,10 +147,15 @@ golang.org/x/net/internal/timeseries
 golang.org/x/net/trace
 # golang.org/x/sys v0.0.0-20211019181941-9d821ace8654
 ## explicit; go 1.17
+golang.org/x/sys/cpu
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
 # golang.org/x/text v0.3.7
 ## explicit; go 1.17
+golang.org/x/text/internal/language
+golang.org/x/text/internal/language/compact
+golang.org/x/text/internal/tag
+golang.org/x/text/language
 golang.org/x/text/secure/bidirule
 golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
@@ -182,6 +205,8 @@ gopkg.in/mgo.v2/internal/scram
 # gopkg.in/tomb.v2 v2.0.0-20161208151619-d5d1b5820637
 ## explicit
 gopkg.in/tomb.v2
+# gopkg.in/validator.v2 v2.0.0-20210331031555-b37d688a7fb0
+## explicit
 # gopkg.in/yaml.v2 v2.0.0
 ## explicit
 gopkg.in/yaml.v2

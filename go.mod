@@ -7,6 +7,9 @@ require (
 	github.com/coreos/etcd v0.0.0-20170403004131-38a914973544
 	github.com/gin-contrib/sessions v0.0.0-20180702031852-da25b7bed527
 	github.com/gin-gonic/gin v1.3.0
+	github.com/go-playground/locales v0.14.0
+	github.com/go-playground/universal-translator v0.18.0
+	github.com/go-playground/validator/v10 v10.10.0
 	github.com/go-redis/redis v6.10.2+incompatible
 	github.com/golang/protobuf v1.1.0
 	github.com/googollee/go-socket.io v0.0.0-20170525141029-5447e71f36d3
@@ -37,6 +40,7 @@ require (
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.5 // indirect
 	github.com/kardianos/govendor v1.0.9 // indirect
+	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/manucorporat/sse v0.0.0-20160126180136-ee05b128a739 // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -45,10 +49,12 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/spf13/pflag v0.0.0-20171106142849-4c012f6dcd95 // indirect
 	github.com/ugorji/go v0.0.0-20170312112114-708a42d24682 // indirect
+	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97 // indirect
 	golang.org/x/sys v0.0.0-20211019181941-9d821ace8654 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.9 // indirect
 	google.golang.org/genproto v0.0.0-20181004005441-af9cb2a35e7f // indirect
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
 	gopkg.in/tomb.v2 v2.0.0-20161208151619-d5d1b5820637 // indirect
+	gopkg.in/validator.v2 v2.0.0-20210331031555-b37d688a7fb0 // indirect
 )

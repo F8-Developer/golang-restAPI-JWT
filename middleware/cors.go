@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	log "github.com/Sirupsen/logrus"
+	"github.com/Sirupsen/logrus"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +16,7 @@ func CORSMiddleware() gin.HandlerFunc {
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 
 		if c.Request.Method == "OPTIONS" {
-			log.Info("OPTIONS")
+			logrus.Info("OPTIONS")
 			c.AbortWithStatus(200)
 		} else {
 			c.Next()

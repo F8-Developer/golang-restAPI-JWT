@@ -5,7 +5,6 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"intrajasa-merchant-api-gateway/core/router/private"
 	"intrajasa-merchant-api-gateway/core/router/public"
 	"intrajasa-merchant-api-gateway/middleware"
 )
@@ -37,10 +36,9 @@ func Start(env string) {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(middleware.CORSMiddleware())
+	router.Use(middleware.LoggerApp())
 	//No Permission Validation
 	public.APIRouter(router)
-	//Permission Validation
-	private.APIRouter(router)
 
 	router.Run(LisAddr)
 }

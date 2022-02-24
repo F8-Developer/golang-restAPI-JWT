@@ -20,6 +20,7 @@ Its clone form [nightlegend/apigateway](https://github.com/nightlegend/apigatewa
 * Init workdir
 ```sh
 git clone git@github.com:intrajasaid/intrajasa-merchant-api-gateway.git
+cd intrajasa-merchant-api-gateway
 ```
 
 * Start APIGATEWAY

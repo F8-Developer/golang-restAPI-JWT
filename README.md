@@ -6,7 +6,7 @@ Its clone form [nightlegend/apigateway](https://github.com/nightlegend/apigatewa
 
 <h1>Design</h1>
 
-![Gopher image](doc/apigateway.jpg)
+![Gopher image](Doc/apigateway.jpg)
 
 <h1>How to run ?</h1>
 

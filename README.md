@@ -83,6 +83,7 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     | ------------- |:-------------                             |
     | conf          | put some application configure to here    |
     | core          | put core sources to here(api, grpc, etc)  |
+    | database      | here database connection and globar var   |
     | middleware    | put middleware code to here, like cors    |
     | logs          | here will save console log                |
     | vendor        | here is save third party                  |

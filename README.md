@@ -10,11 +10,6 @@ Its clone form [nightlegend/apigateway](https://github.com/nightlegend/apigatewa
 
 <h1>How to run ?</h1>
 
-<h2>Prepare step(optional)</h2>
-
->start mongo db in your localhost, and update your mongodb info in /conf/app.conf.yml. You also can select mysql.
-
-
 <h2>Start APIGATEWAY</h2>
 
 * Init workdir
@@ -43,11 +38,16 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     package main
     import (
         "flag"
-        "os"
-        log "github.com/Sirupsen/logrus"
-        "intrajasa-merchant-api-gateway/core/router"
-    )
+        "fmt"
+        "net"
 
+        mgrpc "intrajasa-merchant-api-gateway/core/grpc"
+        log "github.com/Sirupsen/logrus"
+        pb "intrajasa-merchant-api-gateway/core/grpc/services"
+        
+        "intrajasa-merchant-api-gateway/core/router"
+        "google.golang.org/grpc"
+    )
     var (
         env = flag.String("env", "development", "running environment")
     )
@@ -55,17 +55,21 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     // Api server start from here. router is define your api router and public it.
     func main() {
         flag.Parse()
-        // set golable logs file path.
-        execDirAbsPath, _ := os.Getwd()
-        f, err := os.OpenFile(execDirAbsPath+"/logs/app.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
-        if err != nil {
-            log.Fatal(err)
-        }
-        //defer to close when you're done with it, not because you think it's idiomatic!
-        defer f.Close()
-        //set output of logs to file
-        log.SetOutput(f)
 
+        // GRPC
+        // Here will enable grpc server, if you don`t want it, you can disable it
+        go func() {
+            lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", 10000))
+            if err != nil {
+                log.Fatalf("failed to listen: %v", err)
+            }
+            var opts []grpc.ServerOption
+            grpcServer := grpc.NewServer(opts...)
+            pb.RegisterRouteGuideServer(grpcServer, mgrpc.NewServer())
+            grpcServer.Serve(lis)
+        }()
+
+        // HTPP
         // start api server, *env is what`s environment will running, currentlly this only for enable or disable debug modle
         // After may be use it load different varible.
         router.Start(*env)
@@ -75,7 +79,6 @@ If running normally, you can access <a href="http://localhost:8080">http://local
 
     | folder        | content                                   |
     | ------------- |:-------------                             |
-    | cmd           | command-line tool                         |
     | conf          | put some application configure to here    |
     | core          | put core sources to here(api, grpc, etc)  |
     | middleware    | put middleware code to here, like cors    |
@@ -107,8 +110,8 @@ If running normally, you can access <a href="http://localhost:8080">http://local
         router.Run(LisAddr)
     }
     ```
-4. Sample api
-   > login api: http://localhost:8080/login
+4. Example Api
+   > gettoken api: http://localhost:8080/vaonline/rest/json/gettoken
 
    ```text
     request:
@@ -120,107 +123,44 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     Postman-Token: a70f71a7-72b9-4106-9bcd-fd2b65be1e87
 
     {
-        "userName": "demouser02",
-        "password": "Password1"
+        "merchantId": "001",
+        "merchantRefCode": "JS008sKs",
+        "secureCode": "e524eea49aa125b01cbfe7f7c3bebd7b257b64abd3dc95288c3740a20c04ffc9"
     }
     
     response:
     {
-        "Message": "Login Successful",
-        "code": 200,
-        "tooken": ""
+        "merchantId": "001",
+        "merchantRefCode":"JS008sKs",
+        "token": "RTkwQjk2QzVGQUM4NDIwQzYxMDVCNDI4QUFCNTNGRkEwRkJCNDBEODA4NEIxOUQ1MTc1NjcyMTFGNDBCNUVBOQ==”,
+        "responseCode": "200",
+        "responseMsg": "Success generate token"
     }
    ```
    >router code implement
    ```go
-    router.POST("/login", func(c *gin.Context) {
-		c.BindJSON(&uis)
-		/*
-			// TO-DO: cache user login session.
-			session := sessions.Default(c)
-			if session.Get(uis.USERNAME) == nil {
-				flag = uis.Login()
-				session.Set(uis.USERNAME, uis.USERNAME)
-				session.Save()
-				log.Println("Try login and save session in session store.")
-			} else {
-				flag = consts.SUCCESS
-				log.Println("Have a session in session store.")
-			}
-		*/
-		flag = uis.Login()
-		switch flag {
-		case consts.SUCCESS:
-			c.JSON(http.StatusOK, gin.H{"code": consts.SUCCESS, "Message": "Login Successful", "tooken": ""})
-		case consts.NOACCOUNT:
-			c.JSON(http.StatusOK, gin.H{"code": consts.NOACCOUNT, "Message": "Not found your account"})
-		case consts.SYSERROR:
-			c.JSON(http.StatusOK, gin.H{"code": consts.SYSERROR, "Message": "System error!!!"})
-		case consts.WRONGPASSWD:
-			c.JSON(http.StatusOK, gin.H{"code": consts.WRONGPASSWD, "Message": "Wrong password..."})
+    router.POST("/vaonline/rest/json/gettoken", func(c *gin.Context) {
+		// using BindJson method to serialize body with struct
+		if err := c.BindJSON(&gt_req); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": err.Error(),
+			})
+			gt_req = structs.GetTokenRequest{}
+			return
 		}
+		if err := validate.Struct(gt_req); err != nil {
+			errs := validator.ToErrResponse(err, trans)
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": errs,
+			})
+			gt_req = structs.GetTokenRequest{}
+			return
+		}
+		
+		gt_res = vaonline.GenerateToken(gt_req)
+		c.JSON(http.StatusOK,&gt_res)
+		gt_req = structs.GetTokenRequest{}
 	})
-   ```
-
-**CMD**
-
->Add command tools for download template code file, later may be add new feature to here.
----
-
-1. Build runnable file on your OS.
-   ```sh
-   cd intrajasa-merchant-api-gateway/cmd
-   go build gga.go
-   ```
-2. Usage about gga.
-   > when you build complete, you can run excuteable file in command line tools:
-   ```sh
-   > gga
-    A cool tools about init a project, It is can help you do some base thing
-    Usage:
-    gga [command]
-
-    Available Commands:
-    clone       clone sample code to your path.
-    help        Help about any command
-
-    Flags:
-    -h, --help   help for gga
-
-    Use "gga [command] --help" for more information about a command.
-
-    > gga clone demo
-
-   ```
-
-3. CMD Implements.
-   > go get "github.com/spf13/cobra"
-   ```go
-    // **key code**
-    // newCmd is new commmand tools. And define all sub-command.
-    func (n *newProject) newCmd() *cobra.Command {
-        // root command
-        cmd := &cobra.Command{
-            Use:   "gga [command]",
-            Short: "A very helpful command line tools about apigateway",
-            Long:  `A cool tools about init a project, It is can help you do some base thing`,
-        }
-        // gga new [path+filename]
-        cmdNewProject := &cobra.Command{
-            Use:   "clone [path+filename]",
-            Short: "clone sample code to your path.",
-            Long:  `Create a new content file. It will guess which kind of file to create based on the path provided.`,
-            RunE:  n.downloadFile,
-        }
-        // add sub-command to root command
-        cmd.AddCommand(cmdNewProject)
-        return cmd
-    }
-
-    func main() {
-	    n := &newProject{}
-	    n.newCmd().Execute()
-    }
    ```
 
 **GRPC**
@@ -249,16 +189,6 @@ If running normally, you can access <a href="http://localhost:8080">http://local
 4. GRPC-go environment by docker
     If you want a generate grpc code env, you can go to [here](https://hub.docker.com/r/nightlegend/grpc-go/).
 
-
-**Related project** 
-
----
-
-If you need a [frond-end](https://github.com/nightlegend/Dashboard) template, It`s will be help you.
-
-If you need a [SOCKET-SERVER](https://github.com/nightlegend/hi), It`s can help you.
-
-If you interest grpc, I am happy to give a sample to you, [GRPC-GO](https://github.com/nightlegend/grpc-server-go), hope you love it, thanks.
 
 ---
 ## Authors

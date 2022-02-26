@@ -40,12 +40,12 @@ If running normally, you can access <a href="http://localhost:8080">http://local
         "fmt"
         "net"
 
-        mgrpc "intrajasa-merchant-api-gateway/core/grpc"
+        mgrpc "intrajasa-merchant-api-gateway/Core/Grpc"
         log "github.com/Sirupsen/logrus"
-        pb "intrajasa-merchant-api-gateway/core/grpc/services"
+        pb "intrajasa-merchant-api-gateway/Core/Grpc/Services"
         
-        "intrajasa-merchant-api-gateway/config"
-        "intrajasa-merchant-api-gateway/core/router"
+        "intrajasa-merchant-api-gateway/Config"
+        "intrajasa-merchant-api-gateway/Core/Router"
         "google.golang.org/grpc"
     )
 

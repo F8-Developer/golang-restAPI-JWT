@@ -3,13 +3,13 @@ import (
 	"fmt"
 	"net"
 
-	mgrpc "intrajasa-merchant-api-gateway/core/grpc"
+	mgrpc "intrajasa-merchant-api-gateway/Core/Grpc"
 	log "github.com/Sirupsen/logrus"
-	pb "intrajasa-merchant-api-gateway/core/grpc/services"
+	pb "intrajasa-merchant-api-gateway/Core/Grpc/Services"
 	
-	"intrajasa-merchant-api-gateway/config"
-	"intrajasa-merchant-api-gateway/database"
-	"intrajasa-merchant-api-gateway/core/router"
+	"intrajasa-merchant-api-gateway/Config"
+	"intrajasa-merchant-api-gateway/Database"
+	"intrajasa-merchant-api-gateway/Core/Router"
 	"google.golang.org/grpc"
 )
 
@@ -19,6 +19,8 @@ func main() {
 	database.Mysql, database.Err = database.ConnectToDB("main")
 	if database.Err != nil {
 		fmt.Println("status error : ", database.Err)
+	} else {
+		fmt.Println("database connected")
 	}
 	defer database.Mysql.Close()
 

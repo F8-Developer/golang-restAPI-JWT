@@ -12,6 +12,7 @@ require (
 	github.com/go-playground/validator/v10 v10.10.0
 	github.com/go-redis/redis v6.10.2+incompatible
 	github.com/golang/protobuf v1.5.2
+	github.com/joho/godotenv v1.4.0
 	github.com/mitchellh/mapstructure v0.0.0-20180111000720-b4575eea38cc
 	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
 	google.golang.org/grpc v0.0.0-20180420001721-4172bfc25e1c

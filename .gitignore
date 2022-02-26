@@ -6,3 +6,4 @@ apigateway
 debug
 .vscode/launch.json
 testdata/*
+.env

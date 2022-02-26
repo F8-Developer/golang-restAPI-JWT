@@ -37,7 +37,6 @@ If running normally, you can access <a href="http://localhost:8080">http://local
    ```go
     package main
     import (
-        "flag"
         "fmt"
         "net"
 
@@ -45,17 +44,13 @@ If running normally, you can access <a href="http://localhost:8080">http://local
         log "github.com/Sirupsen/logrus"
         pb "intrajasa-merchant-api-gateway/core/grpc/services"
         
+        "intrajasa-merchant-api-gateway/config"
         "intrajasa-merchant-api-gateway/core/router"
         "google.golang.org/grpc"
-    )
-    var (
-        env = flag.String("env", "development", "running environment")
     )
 
     // Api server start from here. router is define your api router and public it.
     func main() {
-        flag.Parse()
-
         // GRPC
         // Here will enable grpc server, if you don`t want it, you can disable it
         go func() {
@@ -68,11 +63,12 @@ If running normally, you can access <a href="http://localhost:8080">http://local
             pb.RegisterRouteGuideServer(grpcServer, mgrpc.NewServer())
             grpcServer.Serve(lis)
         }()
+        app_env := config.GoDotEnvVariable("APP_ENV")
 
         // HTPP
         // start api server, *env is what`s environment will running, currentlly this only for enable or disable debug modle
         // After may be use it load different varible.
-        router.Start(*env)
+        router.Start(app_env)
     }
    ```
 2. Project code structure

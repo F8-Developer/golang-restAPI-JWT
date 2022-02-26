@@ -15,6 +15,7 @@ require (
 	github.com/googollee/go-socket.io v0.0.0-20170525141029-5447e71f36d3
 	github.com/gorilla/websocket v0.0.0-20170718202341-a69d9f6de432
 	github.com/mitchellh/mapstructure v0.0.0-20180111000720-b4575eea38cc
+	github.com/shopspring/decimal v1.3.1
 	github.com/spf13/cobra v0.0.0-20180124073143-f91529fc6092
 	github.com/spf13/jwalterweatherman v0.0.0-20180109140146-7c0cea34c8ec
 	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f

@@ -8,12 +8,20 @@ import (
 	pb "intrajasa-merchant-api-gateway/core/grpc/services"
 	
 	"intrajasa-merchant-api-gateway/config"
+	"intrajasa-merchant-api-gateway/database"
 	"intrajasa-merchant-api-gateway/core/router"
 	"google.golang.org/grpc"
 )
 
 // Api server start from here. router is define your api router and public it.
 func main() {
+	// GORM DATABASE
+	database.Mysql, database.Err = database.ConnectToDB("main")
+	if database.Err != nil {
+		fmt.Println("status error : ", database.Err)
+	}
+	defer database.Mysql.Close()
+
 	// GRPC
 	// Here will enable grpc server, if you don`t want it, you can disable it
 	go func() {

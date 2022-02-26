@@ -18,6 +18,12 @@ git clone git@github.com:intrajasaid/intrajasa-merchant-api-gateway.git
 cd intrajasa-merchant-api-gateway
 ```
 
+* Copy .env.example to .env
+```sh
+cp .env.example .env
+# change default config .env with your local config 
+```
+
 * Start APIGATEWAY
 ```sh
 # start with default

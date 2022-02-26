@@ -10,6 +10,7 @@ import (
 	"intrajasa-merchant-api-gateway/Config"
 	"intrajasa-merchant-api-gateway/Database"
 	"intrajasa-merchant-api-gateway/Core/Router"
+	"intrajasa-merchant-api-gateway/Core/Models"
 	"google.golang.org/grpc"
 )
 
@@ -23,6 +24,7 @@ func main() {
 		fmt.Println("database connected")
 	}
 	defer database.Mysql.Close()
+	database.Mysql.AutoMigrate(&Models.MerchantVa{})
 
 	// GRPC
 	// Here will enable grpc server, if you don`t want it, you can disable it

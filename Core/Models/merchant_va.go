@@ -8,7 +8,6 @@ import (
 
 type MerchantVa struct {
 	gorm.Model
-	Id int64 `json:"id"`
 	IdMerchant int64 `json:"id_merchant"`
 	SecretWord string `json:"secret_word"`
 }
@@ -18,14 +17,14 @@ func (mv *MerchantVa) TableName() string {
 }
 
 func GetAllMerchantVa(mv *[]MerchantVa) (err error) {
-	if err = database.Mysql.Find(mv).Error; err != nil {
+	if err = Database.Mysql.Find(mv).Error; err != nil {
 		return err
 	}
 	return nil
 }
 
 func FindMerchantVa(mv *MerchantVa, id string) (err error) {
-	if err := database.Mysql.Where("id = ?", id).First(mv).Error; err != nil {
+	if err := Database.Mysql.Where("id = ?", id).First(mv).Error; err != nil {
 		return err
 	}
 	return nil

@@ -1,21 +1,12 @@
-package redis
+package Utils
 
 import (
-	log "github.com/Sirupsen/logrus"
-	"github.com/go-redis/redis"
+	"intrajasa-merchant-api-gateway/Core/Models"
 )
 
 // NewClient :
 // new connect object for redis.
-func NewClient() *redis.Client {
-	client := redis.NewClient(&redis.Options{
-		Addr:     "0.0.0.0:6379",
-		Password: "", // no password set
-		DB:       0,  // use default DB
-	})
+func SecureCodeCheck(secure_code string, merchant_va Models.MerchantVa) bool {
 
-	pong, err := client.Ping().Result()
-	log.Info(pong, err)
-	// Output: PONG <nil>
-	return client
+	return true
 }

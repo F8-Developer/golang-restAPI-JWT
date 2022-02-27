@@ -1,4 +1,4 @@
-package middleware
+package Middleware
 
 import (
     "time"

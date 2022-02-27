@@ -1,4 +1,4 @@
-package structs
+package Structs
 
 type GenerateVaRequest struct {
 	MerchantId string `json:"merchantId" validate:"required,alphanum,max=12"`

@@ -1,4 +1,4 @@
-package router
+package Router
 
 import (
 	"fmt"
@@ -35,10 +35,10 @@ func Start(env string) {
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
-	router.Use(middleware.CORSMiddleware())
-	router.Use(middleware.LoggerApp())
+	router.Use(Middleware.CORSMiddleware())
+	router.Use(Middleware.LoggerApp())
 	//No Permission Validation
-	public.APIRouter(router)
+	Public.APIRouter(router)
 
 	router.Run(LisAddr)
 }

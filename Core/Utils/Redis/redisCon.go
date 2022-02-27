@@ -1,4 +1,4 @@
-package redis
+package Redis
 
 import (
 	log "github.com/Sirupsen/logrus"

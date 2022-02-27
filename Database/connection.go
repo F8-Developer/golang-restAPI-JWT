@@ -1,4 +1,4 @@
-package database
+package Database
 
 import (
 	"fmt"
@@ -10,12 +10,12 @@ import (
 var connectionString string
 
 func ConnectToDB(database string) (*gorm.DB, error) {
-	db_connection := config.GoDotEnvVariable("DB_CONNECTION")
-	db_host := config.GoDotEnvVariable("DB_HOST")
-	db_port := config.GoDotEnvVariable("DB_PORT")
-	db_database := config.GoDotEnvVariable("DB_DATABASE")
-	db_username := config.GoDotEnvVariable("DB_USERNAME")
-	db_password := config.GoDotEnvVariable("DB_PASSWORD")
+	db_connection := Config.GoDotEnvVariable("DB_CONNECTION")
+	db_host := Config.GoDotEnvVariable("DB_HOST")
+	db_port := Config.GoDotEnvVariable("DB_PORT")
+	db_database := Config.GoDotEnvVariable("DB_DATABASE")
+	db_username := Config.GoDotEnvVariable("DB_USERNAME")
+	db_password := Config.GoDotEnvVariable("DB_PASSWORD")
 
 	switch database {
 	case "main":

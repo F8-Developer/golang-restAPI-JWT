@@ -1,4 +1,4 @@
-package public
+package Public
 
 import (
 	"net/http"
@@ -15,22 +15,22 @@ import (
 )
 
 var (
-	dv_req structs.DisableVaRequest
-	dv_res structs.DisableVaResponse
-	gt_req structs.GetTokenRequest
-	gt_res structs.GetTokenResponse
-	gv_req structs.GenerateVaRequest
-	gv_res structs.GenerateVaResponse
-	gvp_req structs.GetVaPaymentStatusRequest
-	gvp_res structs.GetVaPaymentStatusResponse
-	uv_req structs.UpdateVaRequest
-	uv_res structs.UpdateVaResponse
+	dv_req Structs.DisableVaRequest
+	dv_res Structs.DisableVaResponse
+	gt_req Structs.GetTokenRequest
+	gt_res Structs.GetTokenResponse
+	gv_req Structs.GenerateVaRequest
+	gv_res Structs.GenerateVaResponse
+	gvp_req Structs.GetVaPaymentStatusRequest
+	gvp_res Structs.GetVaPaymentStatusResponse
+	uv_req Structs.UpdateVaRequest
+	uv_res Structs.UpdateVaResponse
 )
 
 // APIRouter define router from here, you can add new api about your new services.
 func APIRouter(router *gin.Engine) {
 	// set validator
-	validate := validator.InitValidator()
+	validate := Validator.InitValidator()
 	english := en.New()
 	uni := ut.New(english, english)
 	trans, _ := uni.GetTranslator("en")
@@ -54,21 +54,21 @@ func APIRouter(router *gin.Engine) {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": err.Error(),
 			})
-			gt_req = structs.GetTokenRequest{}
+			gt_req = Structs.GetTokenRequest{}
 			return
 		}
 		if err := validate.Struct(gt_req); err != nil {
-			errs := validator.ToErrResponse(err, trans)
+			errs := Validator.ToErrResponse(err, trans)
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": errs,
 			})
-			gt_req = structs.GetTokenRequest{}
+			gt_req = Structs.GetTokenRequest{}
 			return
 		}
 		
-		gt_res = vaonline.GenerateToken(gt_req)
-		c.JSON(http.StatusOK,&gt_res)
-		gt_req = structs.GetTokenRequest{}
+		gt_res = VaOnline.GenerateToken(gt_req)
+		c.JSON(gt_res.ResponseCode,&gt_res)
+		gt_req = Structs.GetTokenRequest{}
 	})
 
 	router.POST("/vaonline/rest/json/generateva", func(c *gin.Context) {
@@ -77,21 +77,21 @@ func APIRouter(router *gin.Engine) {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": err.Error(),
 			})
-			gv_req = structs.GenerateVaRequest{}
+			gv_req = Structs.GenerateVaRequest{}
 			return
 		}
 		if err := validate.Struct(gv_req); err != nil {
-			errs := validator.ToErrResponse(err, trans)
+			errs := Validator.ToErrResponse(err, trans)
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": errs,
 			})
-			gv_req = structs.GenerateVaRequest{}
+			gv_req = Structs.GenerateVaRequest{}
 			return
 		}
 
-		gv_res = vaonline.GenerateVa(gv_req)
+		gv_res = VaOnline.GenerateVa(gv_req)
 		c.JSON(http.StatusOK,&gv_res)
-		gv_req = structs.GenerateVaRequest{}
+		gv_req = Structs.GenerateVaRequest{}
 	})
 
 	router.POST("/vaonline/rest/json/getstatus", func(c *gin.Context) {
@@ -100,21 +100,21 @@ func APIRouter(router *gin.Engine) {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": err.Error(),
 			})
-			gvp_req = structs.GetVaPaymentStatusRequest{}
+			gvp_req = Structs.GetVaPaymentStatusRequest{}
 			return
 		}
 		if err := validate.Struct(gvp_req); err != nil {
-			errs := validator.ToErrResponse(err, trans)
+			errs := Validator.ToErrResponse(err, trans)
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": errs,
 			})
-			gvp_req = structs.GetVaPaymentStatusRequest{}
+			gvp_req = Structs.GetVaPaymentStatusRequest{}
 			return
 		}
 
-		gvp_res = vaonline.GetVaPaymentStatus(gvp_req)
+		gvp_res = VaOnline.GetVaPaymentStatus(gvp_req)
 		c.JSON(http.StatusOK,&gvp_res)
-		gvp_req = structs.GetVaPaymentStatusRequest{}
+		gvp_req = Structs.GetVaPaymentStatusRequest{}
 	})
 
 	router.POST("/vaonline/rest/json/disableVA", func(c *gin.Context) {
@@ -123,21 +123,21 @@ func APIRouter(router *gin.Engine) {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": err.Error(),
 			})
-			dv_req = structs.DisableVaRequest{}
+			dv_req = Structs.DisableVaRequest{}
 			return
 		}
 		if err := validate.Struct(dv_req); err != nil {
-			errs := validator.ToErrResponse(err, trans)
+			errs := Validator.ToErrResponse(err, trans)
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": errs,
 			})
-			dv_req = structs.DisableVaRequest{}
+			dv_req = Structs.DisableVaRequest{}
 			return
 		}
 
-		dv_res = vaonline.DisableVa(dv_req)
+		dv_res = VaOnline.DisableVa(dv_req)
 		c.JSON(http.StatusOK,&dv_res)
-		dv_req = structs.DisableVaRequest{}
+		dv_req = Structs.DisableVaRequest{}
 	})
 
 	router.POST("/vaonline/rest/json/updateVA", func(c *gin.Context) {
@@ -146,21 +146,21 @@ func APIRouter(router *gin.Engine) {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": err.Error(),
 			})
-			uv_req = structs.UpdateVaRequest{}
+			uv_req = Structs.UpdateVaRequest{}
 			return
 		}
 		if err := validate.Struct(uv_req); err != nil {
-			errs := validator.ToErrResponse(err, trans)
+			errs := Validator.ToErrResponse(err, trans)
 			c.JSON(http.StatusBadRequest, gin.H{
 				"error": errs,
 			})
-			uv_req = structs.UpdateVaRequest{}
+			uv_req = Structs.UpdateVaRequest{}
 			return
 		}
 
-		uv_res = vaonline.UpdateVa(uv_req)
+		uv_res = VaOnline.UpdateVa(uv_req)
 		c.JSON(http.StatusOK,&uv_res)
-		uv_req = structs.UpdateVaRequest{}
+		uv_req = Structs.UpdateVaRequest{}
 	})
 	// END INTRAJASA DEFAULT ROUTE
 }

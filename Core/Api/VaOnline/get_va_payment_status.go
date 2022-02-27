@@ -1,11 +1,11 @@
-package vaonline
+package VaOnline
 
 import (
 	"intrajasa-merchant-api-gateway/Core/Structs"
 )
 
 // Register register one new user in db, return a boolean value to make know success or not.
-func GetVaPaymentStatus(gvp_req structs.GetVaPaymentStatusRequest) (gvp_res structs.GetVaPaymentStatusResponse) {
+func GetVaPaymentStatus(gvp_req Structs.GetVaPaymentStatusRequest) (gvp_res Structs.GetVaPaymentStatusResponse) {
 	gvp_res.MerchantId = gvp_req.MerchantId
 	gvp_res.MerchantRefCode = gvp_req.MerchantRefCode
 	gvp_res.VaNumber = gvp_req.VaNumber

@@ -1,4 +1,4 @@
-package validator
+package Validator
 import (
     "fmt"
     "reflect"

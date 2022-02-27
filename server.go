@@ -17,14 +17,14 @@ import (
 // Api server start from here. router is define your api router and public it.
 func main() {
 	// GORM DATABASE
-	database.Mysql, database.Err = database.ConnectToDB("main")
-	if database.Err != nil {
-		fmt.Println("status error : ", database.Err)
+	Database.Mysql, Database.Err = Database.ConnectToDB("main")
+	if Database.Err != nil {
+		fmt.Println("status error : ", Database.Err)
 	} else {
 		fmt.Println("database connected")
 	}
-	defer database.Mysql.Close()
-	database.Mysql.AutoMigrate(&Models.MerchantVa{})
+	defer Database.Mysql.Close()
+	Database.Mysql.AutoMigrate(&Models.MerchantVa{})
 
 	// GRPC
 	// Here will enable grpc server, if you don`t want it, you can disable it
@@ -38,10 +38,10 @@ func main() {
 		pb.RegisterRouteGuideServer(grpcServer, mgrpc.NewServer())
 		grpcServer.Serve(lis)
 	}()
-	app_env := config.GoDotEnvVariable("APP_ENV")
+	app_env := Config.GoDotEnvVariable("APP_ENV")
 
 	// HTPP
 	// start api server, *env is what`s environment will running, currentlly this only for enable or disable debug modle
 	// After may be use it load different varible.
-	router.Start(app_env)
+	Router.Start(app_env)
 }

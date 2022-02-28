@@ -9,6 +9,7 @@ import (
 	
 	"intrajasa-merchant-api-gateway/Config"
 	"intrajasa-merchant-api-gateway/Database"
+	"intrajasa-merchant-api-gateway/Core/Utils/Redis"
 	"intrajasa-merchant-api-gateway/Core/Router"
 	"intrajasa-merchant-api-gateway/Core/Models"
 	"google.golang.org/grpc"
@@ -25,6 +26,8 @@ func main() {
 	}
 	defer Database.Mysql.Close()
 	Database.Mysql.AutoMigrate(&Models.MerchantVa{})
+	// Redis DB
+	Redis.Client = Redis.NewClient()
 
 	// GRPC
 	// Here will enable grpc server, if you don`t want it, you can disable it

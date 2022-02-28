@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"time"
 	"strconv"
-	"intrajasa-merchant-api-gateway/Core/Models"
 	"encoding/base64"
 	"crypto/sha256"
+	"intrajasa-merchant-api-gateway/Core/Models"
+	"intrajasa-merchant-api-gateway/Core/Utils/Redis"
 )
 
 func GenerateToken(merchant_refcode string, merchant_va Models.MerchantVa) (string, string) {
@@ -19,4 +20,21 @@ func GenerateToken(merchant_refcode string, merchant_va Models.MerchantVa) (stri
 	sum := sha256.Sum256([]byte(string_token_base64))
 	string_token_sha256 := fmt.Sprintf("%x", sum)
 	return string_token_base64, string_token_sha256
+}
+
+func ValidateToken(t string) bool {
+	val, err := Redis.Client.Get("t"+t).Result()
+	if err != nil {
+		return false
+    }
+
+	if val == t {
+		err = Redis.Client.Del("t"+t).Err()
+		if err != nil {
+			return false
+		} else {
+			return true
+		}
+	}
+	return false
 }

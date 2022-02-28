@@ -3,14 +3,11 @@ package VaOnline
 import (
 	"fmt"
 	"time"
-	"context"
 	"intrajasa-merchant-api-gateway/Core/Structs"
 	"intrajasa-merchant-api-gateway/Core/Models"
 	"intrajasa-merchant-api-gateway/Core/Utils"
 	"intrajasa-merchant-api-gateway/Core/Utils/Redis"
 )
-
-var ctx = context.Background()
 
 // Register register one new user in db, return a boolean value to make know success or not.
 func GenerateToken(gt_req Structs.GetTokenRequest) (gt_res Structs.GetTokenResponse) {
@@ -37,7 +34,7 @@ func GenerateToken(gt_req Structs.GetTokenRequest) (gt_res Structs.GetTokenRespo
 	gt_res.Token = string_token_base64
 
 	// store to redis db
-	err = Redis.Client.Set("t", string_token_sha256, 10 * time.Minute).Err()
+	err = Redis.Client.Set("t"+string_token_sha256, string_token_sha256, 10 * time.Minute).Err()
 	if err != nil {
 		fmt.Println(err)
 	}

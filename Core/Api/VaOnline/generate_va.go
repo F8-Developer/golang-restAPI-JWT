@@ -9,11 +9,10 @@ import (
     "time"
 	"strconv"
 	"bytes"
-	"fmt"
 	log "github.com/Sirupsen/logrus"
 )
 
-var core_gv_res Structs.CoreGenerateVaResponse
+var core_res Structs.CoreResponse
 
 // Register register one new user in db, return a boolean value to make know success or not.
 func GenerateVa(gv_req Structs.GenerateVaRequest) (gv_res Structs.GenerateVaResponse) {
@@ -56,15 +55,14 @@ func GenerateVa(gv_req Structs.GenerateVaRequest) (gv_res Structs.GenerateVaResp
         log.Fatal(err)
     }
 
-	json.Unmarshal([]byte(body), &core_gv_res)
-	gv_res.ResponseMsg = core_gv_res.Data.Message
-	gv_res.ResponseCode = 200
-	if core_gv_res.Data.StatusCode != "00" {
-		gv_res.ResponseCode, _ = strconv.Atoi(core_gv_res.Data.StatusCode)
+	json.Unmarshal([]byte(body), &core_res)
+	gv_res.ResponseMsg = core_res.Data.Message
+	gv_res.ResponseCode = core_res.Status
+	if core_res.Data.StatusCode != "00" {
+		gv_res.ResponseCode, _ = strconv.Atoi(core_res.Data.StatusCode)
 	} else {
-		gv_res.VaNumber = core_gv_res.Data.VaNo
+		gv_res.VaNumber = core_res.Data.VaNo
 	}
-	fmt.Println(core_gv_res.Data)
 
 	return gv_res
 }

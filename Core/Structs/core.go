@@ -1,12 +1,12 @@
 package Structs
 
-type CoreGenerateVaResponse struct {
-	Data CoreDataGVResponse `json:"data"`
+type CoreResponse struct {
+	Data CoreDataResponse `json:"data"`
 	Message string `json:"message"`
 	Status int `json:"status"`
 }
 
-type CoreDataGVResponse struct {
+type CoreDataResponse struct {
 	VaNo string `json:"va_no"`
     Message string `json:"message"`
     StatusCode string `json:"status_code"`

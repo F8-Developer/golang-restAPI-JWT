@@ -12,7 +12,7 @@ import (
 	"intrajasa-merchant-api-gateway/Core/Validator"
 	cv "intrajasa-merchant-api-gateway/Core/Validator/CustomValidation"
 	"intrajasa-merchant-api-gateway/Core/Api/VaOnline"
-	// "intrajasa-merchant-api-gateway/Core/Utils"
+	"intrajasa-merchant-api-gateway/Core/Utils"
 )
 
 var (
@@ -73,15 +73,15 @@ func APIRouter(router *gin.Engine) {
 	})
 
 	router.POST("/vaonline/rest/json/generateva", func(c *gin.Context) {
-		// // validate token
-		// request := c.Request.URL.Query()
-		// if !Utils.ValidateToken(request.Get("t")) {
-		// 	c.JSON(http.StatusBadRequest, gin.H{
-		// 		"error": "Not Authorized!",
-		// 	})
-		// 	gv_req = Structs.GenerateVaRequest{}
-		// 	return
-		// }
+		// validate token
+		request := c.Request.URL.Query()
+		if !Utils.ValidateToken(request.Get("t")) {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"error": "Not Authorized!",
+			})
+			gv_req = Structs.GenerateVaRequest{}
+			return
+		}
 
 		// using BindJson method to serialize body with struct
 		if err := c.BindJSON(&gv_req); err != nil {

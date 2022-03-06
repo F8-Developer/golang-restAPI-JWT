@@ -2,16 +2,69 @@ package VaOnline
 
 import (
 	"intrajasa-merchant-api-gateway/Core/Structs"
+	"intrajasa-merchant-api-gateway/Config"
+	"io/ioutil"
+	"net/http"
+	"encoding/json"
+    "time"
+	"strconv"
+	"bytes"
+	"fmt"
+	log "github.com/Sirupsen/logrus"
 )
+
+var core_gv_res Structs.CoreGenerateVaResponse
 
 // Register register one new user in db, return a boolean value to make know success or not.
 func GenerateVa(gv_req Structs.GenerateVaRequest) (gv_res Structs.GenerateVaResponse) {
 	gv_res.MerchantId = gv_req.MerchantId
 	gv_res.MerchantRefCode = gv_req.MerchantRefCode
 	gv_res.TotalAmount = gv_req.TotalAmount
-	gv_res.VaNumber = "8228006200100634"
+
+	core_secret_key := Config.GoDotEnvVariable("CORE_SECRET_KEY")
+	url := Config.GoDotEnvVariable("CORE_URL_GENERATE_VA")
+
+	// send request to core
+	c := http.Client{Timeout: time.Duration(3) * time.Second}
+	va_type := strconv.Itoa(gv_req.VaType)
+	expired_period := strconv.Itoa(gv_req.ExpiryPeriod)
+	customer_phone := strconv.FormatUint(gv_req.CustomerData.CustPhoneNumber, 10)
+	body_req, _ := json.Marshal(map[string]string{
+        "merchant_id" : gv_req.MerchantId,
+		"merchant_ref_code": gv_req.MerchantRefCode,
+		"va_type" : va_type,
+		"customer_name": gv_req.CustomerData.CustName,
+		"customer_address": gv_req.CustomerData.CustAddress1,
+		"customer_phone": customer_phone,
+		"customer_email":gv_req.CustomerData.CustEmail,
+		"expired_period": expired_period,
+    })
+	req, err := http.NewRequest("POST", url, bytes.NewReader(body_req))
+	if err != nil {
+        log.Fatal(err)
+    }
+
+    req.Header.Add("Core-Secret-Key", core_secret_key)
+    resp, err := c.Do(req)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    defer resp.Body.Close()
+    body, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+	json.Unmarshal([]byte(body), &core_gv_res)
+	gv_res.ResponseMsg = core_gv_res.Data.Message
 	gv_res.ResponseCode = 200
-	gv_res.ResponseMsg = "Success generate VA Number"
+	if core_gv_res.Data.StatusCode != "00" {
+		gv_res.ResponseCode, _ = strconv.Atoi(core_gv_res.Data.StatusCode)
+	} else {
+		gv_res.VaNumber = core_gv_res.Data.VaNo
+	}
+	fmt.Println(core_gv_res.Data)
 
 	return gv_res
 }

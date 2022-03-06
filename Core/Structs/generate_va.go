@@ -6,8 +6,8 @@ type GenerateVaRequest struct {
 	CustomerData GenerateVaCustomerData `json:"customerData" validate:"required"`
 	ProductData []GenerateVaProductData `json:"productData" validate:"dive"`
     TotalAmount float64 `json:"totalAmount" validate:"required,float-decimal-val"`
-    VaType *int `json:"vaType" validate:"required,int-length-1"`
-    ExpiryPeriod int `json:"expiryPeriod" validate:"numeric,int-length-10"`
+    VaType int `json:"vaType" validate:"required,int-length-1"`
+    ExpiryPeriod int `json:"expiryPeriod" validate:"omitempty,numeric,int-length-10"`
 	SecureCode string `json:"secureCode" validate:"required,alphanum,max=64"`
 }
 
@@ -25,7 +25,7 @@ type GenerateVaCustomerData struct {
     CustAddress1 string `json:"custAddress1" validate:"omitempty,max=100"`
     CustAddress2 string `json:"custAddress2" validate:"omitempty,max=100"`
     CustAddress3 string `json:"custAddress3" validate:"omitempty,max=100"`
-    CustPhoneNumber *uint64 `json:"custPhoneNumber" validate:"numeric,uint64-length-18"`
+    CustPhoneNumber uint64 `json:"custPhoneNumber" validate:"numeric,uint64-length-18"`
     CustEmail string `json:"custEmail" validate:"omitempty,email"`
     CustRegisteredDate string `json:"custRegisteredDate" validate:"omitempty,date-format"`
     CustCountryCode string `json:"custCountryCode" validate:"omitempty,alphanum,max=3"`

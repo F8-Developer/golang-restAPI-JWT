@@ -19,7 +19,7 @@ var buf bytes.Buffer
 func LoggerApp() gin.HandlerFunc {
 	// set golable logs file path.
 	execDirAbsPath, _ := os.Getwd()
-	f, err := os.OpenFile(execDirAbsPath+"/logs/app.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	f, err := os.OpenFile(execDirAbsPath+"/Logs/app.log", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}

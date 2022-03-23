@@ -9,6 +9,7 @@ import (
     "time"
 	"strconv"
 	"bytes"
+	"fmt"
 	log "github.com/Sirupsen/logrus"
 )
 
@@ -26,12 +27,14 @@ func GenerateVa(gv_req Structs.GenerateVaRequest) (gv_res Structs.GenerateVaResp
 	// send request to core
 	c := http.Client{Timeout: time.Duration(3) * time.Second}
 	va_type := strconv.Itoa(gv_req.VaType)
+	amount := fmt.Sprintf("%f", gv_req.TotalAmount)
 	expired_period := strconv.Itoa(gv_req.ExpiryPeriod)
 	customer_phone := strconv.FormatUint(gv_req.CustomerData.CustPhoneNumber, 10)
 	body_req, _ := json.Marshal(map[string]string{
         "merchant_id" : gv_req.MerchantId,
 		"merchant_ref_code": gv_req.MerchantRefCode,
 		"va_type" : va_type,
+		"amount" : amount,
 		"customer_name": gv_req.CustomerData.CustName,
 		"customer_address": gv_req.CustomerData.CustAddress1,
 		"customer_phone": customer_phone,

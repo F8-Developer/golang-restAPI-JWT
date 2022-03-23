@@ -9,5 +9,5 @@ type CoreResponse struct {
 type CoreDataResponse struct {
 	VaNo string `json:"va_no"`
     Message string `json:"message"`
-    StatusCode string `json:"status_code"`
+    StatusCode int `json:"status_code"`
 }

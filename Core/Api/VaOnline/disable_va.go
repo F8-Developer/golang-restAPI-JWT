@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"encoding/json"
     "time"
-	"strconv"
 	"bytes"
 	log "github.com/Sirupsen/logrus"
 )
@@ -44,8 +43,8 @@ func DisableVa(dv_req Structs.DisableVaRequest) (dv_res Structs.DisableVaRespons
 	json.Unmarshal([]byte(body), &core_res)
 	dv_res.ResponseMsg = core_res.Data.Message
 	dv_res.ResponseCode = core_res.Status
-	if core_res.Data.StatusCode != "00" {
-		dv_res.ResponseCode, _ = strconv.Atoi(core_res.Data.StatusCode)
+	if core_res.Data.StatusCode != 200 {
+		dv_res.ResponseCode = core_res.Data.StatusCode
 	}
 
 	return dv_res

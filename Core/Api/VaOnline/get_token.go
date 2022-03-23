@@ -19,14 +19,14 @@ func GenerateToken(gt_req Structs.GetTokenRequest) (gt_res Structs.GetTokenRespo
 	var merchant_va Models.MerchantVa
 	err := Models.FindMerchantVa(&merchant_va, gt_res.MerchantId)
 	if err != nil {
-		gt_res.ResponseCode = 400
-		gt_res.ResponseMsg = "Merchant Not Found!"
+		gt_res.ResponseCode = 211
+		gt_res.ResponseMsg = "Invalid Merchant Id"
 		return gt_res
 	}
 
 	if !Utils.SecureCodeCheck(gt_req.SecureCode, gt_req.MerchantRefCode, merchant_va) {
-		gt_res.ResponseCode = 400
-		gt_res.ResponseMsg = "Not Authorized!"
+		gt_res.ResponseCode = 213
+		gt_res.ResponseMsg = "Invalid Secure Code"
 		return
 	}
 

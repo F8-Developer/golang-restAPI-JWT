@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"encoding/json"
     "time"
-	"strconv"
 	"bytes"
 	"fmt"
 	log "github.com/Sirupsen/logrus"
@@ -47,8 +46,8 @@ func UpdateVa(uv_req Structs.UpdateVaRequest) (uv_res Structs.UpdateVaResponse) 
 	json.Unmarshal([]byte(body), &core_res)
 	uv_res.ResponseMsg = core_res.Data.Message
 	uv_res.ResponseCode = core_res.Status
-	if core_res.Data.StatusCode != "00" {
-		uv_res.ResponseCode, _ = strconv.Atoi(core_res.Data.StatusCode)
+	if core_res.Data.StatusCode != 200 {
+		uv_res.ResponseCode = core_res.Data.StatusCode
 	}
 
 	return uv_res

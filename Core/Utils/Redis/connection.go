@@ -2,7 +2,7 @@ package Redis
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"intrajasa-merchant-api-gateway/Config"
+	"merchant-api-gateway/Config"
 	"github.com/go-redis/redis"
 )
 

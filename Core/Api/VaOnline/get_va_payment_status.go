@@ -1,7 +1,7 @@
 package VaOnline
 
 import (
-	"intrajasa-merchant-api-gateway/Core/Structs"
+	"merchant-api-gateway/Core/Structs"
 )
 
 // Register register one new user in db, return a boolean value to make know success or not.

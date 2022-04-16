@@ -1,7 +1,7 @@
 package Models
 
 import (
-	"intrajasa-merchant-api-gateway/Database"
+	"merchant-api-gateway/Database"
 	"github.com/jinzhu/gorm"
 	_ "github.com/go-sql-driver/mysql"
 )

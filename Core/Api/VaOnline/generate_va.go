@@ -1,8 +1,8 @@
 package VaOnline
 
 import (
-	"intrajasa-merchant-api-gateway/Core/Structs"
-	"intrajasa-merchant-api-gateway/Config"
+	"merchant-api-gateway/Core/Structs"
+	"merchant-api-gateway/Config"
 	"io/ioutil"
 	"net/http"
 	"encoding/json"

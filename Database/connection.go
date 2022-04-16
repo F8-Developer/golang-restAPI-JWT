@@ -3,7 +3,7 @@ package Database
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
-	"intrajasa-merchant-api-gateway/Config"
+	"merchant-api-gateway/Config"
 	_ "github.com/go-sql-driver/mysql"
 )
 

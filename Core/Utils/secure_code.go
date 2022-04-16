@@ -5,7 +5,7 @@ import (
 	"crypto/sha1"
 	"crypto/sha256"
 	"strconv"
-	"intrajasa-merchant-api-gateway/Core/Models"
+	"merchant-api-gateway/Core/Models"
 )
 
 func SecureCodeCheck(secure_code string, merchant_refcode string, merchant_va Models.MerchantVa) bool {

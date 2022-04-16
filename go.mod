@@ -1,4 +1,4 @@
-module intrajasa-merchant-api-gateway
+module merchant-api-gateway
 
 go 1.17
 

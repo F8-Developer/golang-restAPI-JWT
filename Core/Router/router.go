@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"intrajasa-merchant-api-gateway/Core/Router/Public"
-	"intrajasa-merchant-api-gateway/Middleware"
+	"merchant-api-gateway/Core/Router/Public"
+	"merchant-api-gateway/Middleware"
 )
 
 // Varible define to here

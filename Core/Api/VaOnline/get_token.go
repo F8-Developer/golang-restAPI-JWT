@@ -3,10 +3,10 @@ package VaOnline
 import (
 	"fmt"
 	"time"
-	"intrajasa-merchant-api-gateway/Core/Structs"
-	"intrajasa-merchant-api-gateway/Core/Models"
-	"intrajasa-merchant-api-gateway/Core/Utils"
-	"intrajasa-merchant-api-gateway/Core/Utils/Redis"
+	"merchant-api-gateway/Core/Structs"
+	"merchant-api-gateway/Core/Models"
+	"merchant-api-gateway/Core/Utils"
+	"merchant-api-gateway/Core/Utils/Redis"
 )
 
 // Register register one new user in db, return a boolean value to make know success or not.

@@ -3,15 +3,15 @@ import (
 	"fmt"
 	"net"
 
-	mgrpc "intrajasa-merchant-api-gateway/Core/Grpc"
+	mgrpc "merchant-api-gateway/Core/Grpc"
 	log "github.com/Sirupsen/logrus"
-	pb "intrajasa-merchant-api-gateway/Core/Grpc/Services"
+	pb "merchant-api-gateway/Core/Grpc/Services"
 	
-	"intrajasa-merchant-api-gateway/Config"
-	"intrajasa-merchant-api-gateway/Database"
-	"intrajasa-merchant-api-gateway/Core/Utils/Redis"
-	"intrajasa-merchant-api-gateway/Core/Router"
-	"intrajasa-merchant-api-gateway/Core/Models"
+	"merchant-api-gateway/Config"
+	"merchant-api-gateway/Database"
+	"merchant-api-gateway/Core/Utils/Redis"
+	"merchant-api-gateway/Core/Router"
+	"merchant-api-gateway/Core/Models"
 	"google.golang.org/grpc"
 )
 

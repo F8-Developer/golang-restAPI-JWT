@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	pb "intrajasa-merchant-api-gateway/Core/Grpc/Services"
+	pb "merchant-api-gateway/Core/Grpc/Services"
 )
 
 // RouteGuideServer is route object

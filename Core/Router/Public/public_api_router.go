@@ -8,11 +8,11 @@ import (
 	ut "github.com/go-playground/universal-translator"
 	en_translations "github.com/go-playground/validator/v10/translations/en"
 
-	"intrajasa-merchant-api-gateway/Core/Structs"
-	"intrajasa-merchant-api-gateway/Core/Validator"
-	cv "intrajasa-merchant-api-gateway/Core/Validator/CustomValidation"
-	"intrajasa-merchant-api-gateway/Core/Api/VaOnline"
-	"intrajasa-merchant-api-gateway/Core/Utils"
+	"merchant-api-gateway/Core/Structs"
+	"merchant-api-gateway/Core/Validator"
+	cv "merchant-api-gateway/Core/Validator/CustomValidation"
+	"merchant-api-gateway/Core/Api/VaOnline"
+	"merchant-api-gateway/Core/Utils"
 )
 
 var (
@@ -48,7 +48,7 @@ func APIRouter(router *gin.Engine) {
 		c.JSON(http.StatusOK, gin.H{"message": "welcome to apigateway, you can find you want here!!!", "userInfo": "Hello World!!!"})
 	})
 
-	// INTRAJASA DEFAULT ROUTE
+	// DEFAULT ROUTE
 	router.POST("/vaonline/rest/json/gettoken", func(c *gin.Context) {
 		// using BindJson method to serialize body with struct
 		if err := c.BindJSON(&gt_req); err != nil {
@@ -173,5 +173,5 @@ func APIRouter(router *gin.Engine) {
 		c.JSON(http.StatusOK,&uv_res)
 		uv_req = Structs.UpdateVaRequest{}
 	})
-	// END INTRAJASA DEFAULT ROUTE
+	// END DEFAULT ROUTE
 }

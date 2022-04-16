@@ -1,4 +1,4 @@
-# Intrajasa [Merchant Api Gateway]:
+# [Merchant Api Gateway]:
 
 Its clone form [nightlegend/apigateway](https://github.com/nightlegend/apigateway). Build with golang and gin. It features a simple and better performance, and customize with requirements needed.
 
@@ -14,8 +14,8 @@ Its clone form [nightlegend/apigateway](https://github.com/nightlegend/apigatewa
 
 * Init workdir
 ```sh
-git clone git@github.com:intrajasaid/intrajasa-merchant-api-gateway.git
-cd intrajasa-merchant-api-gateway
+git clone git@github.com:Nomina-VIp/merchant-api-gateway.git
+cd merchant-api-gateway
 ```
 
 * Copy .env.example to .env
@@ -46,12 +46,12 @@ If running normally, you can access <a href="http://localhost:8080">http://local
         "fmt"
         "net"
 
-        mgrpc "intrajasa-merchant-api-gateway/Core/Grpc"
+        mgrpc "merchant-api-gateway/Core/Grpc"
         log "github.com/Sirupsen/logrus"
-        pb "intrajasa-merchant-api-gateway/Core/Grpc/Services"
+        pb "merchant-api-gateway/Core/Grpc/Services"
         
-        "intrajasa-merchant-api-gateway/Config"
-        "intrajasa-merchant-api-gateway/Core/Router"
+        "merchant-api-gateway/Config"
+        "merchant-api-gateway/Core/Router"
         "google.golang.org/grpc"
     )
 

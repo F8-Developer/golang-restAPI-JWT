@@ -260,7 +260,120 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     <br>
     <br>
     <br>
+    > product detail api : http://localhost:8080/secure/product/detail
 
+    ```text
+    request:
+
+    POST /secure/product/detail HTTP/1.1
+    Host: localhost:8080
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmFpc2hhbCBhbXJ1bGxhaCIsImVtYWlsIjoiYy5mYWlzaGFsLmFtcnVsbGFoQGdtYWlsLmNvbSIsImV4cCI6MTY1MTAxMjU5MX0.Sv1hXav7BbwjIEo2aY6MQb8oPD11bB9cq00TQxvyhLk
+    Content-Type: application/json
+    Content-Length: 23
+
+    {
+        "productID" : 3
+    }
+    
+    response:
+    {
+        "product": {
+            "ID": 3,
+            "Categories": [
+                {
+                    "ID": 2,
+                    "Name": "sayur",
+                    "Descriptions": "sayur"
+                }
+            ],
+            "Name": "Wortel",
+            "Descriptions": "Wortel (~0.1 kg)",
+            "Quantity": 100,
+            "Price": 1700
+        },
+        "responseCode": 200,
+        "responseMsg": "Product detail successful"
+    }
+    ```
+    ![Gopher image](Doc/product-detail.png)
+    <br>
+    <br>
+    <br>
+    > cart add api : http://localhost:8080/secure/cart/add
+
+    ```text
+    request:
+
+    POST /secure/cart/add HTTP/1.1
+    Host: localhost:8080
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmFpc2hhbCBhbXJ1bGxhaCIsImVtYWlsIjoiYy5mYWlzaGFsLmFtcnVsbGFoQGdtYWlsLmNvbSIsImV4cCI6MTY1MTAxMjU5MX0.Sv1hXav7BbwjIEo2aY6MQb8oPD11bB9cq00TQxvyhLk
+    Content-Type: application/json
+    Content-Length: 44
+
+    {
+        "productID" : 3,
+        "quantity" : 10
+    }
+    
+    response:
+    {
+        "responseCode": 200,
+        "responseMsg": "Product successfully add to cart"
+    }
+    ```
+    ![Gopher image](Doc/cart-add.png)
+    <br>
+    <br>
+    <br>
+    > cart list api : http://localhost:8080/secure/cart/list
+
+    ```text
+    request:
+
+    POST /secure/cart/list HTTP/1.1
+    Host: localhost:8080
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmFpc2hhbCBhbXJ1bGxhaCIsImVtYWlsIjoiYy5mYWlzaGFsLmFtcnVsbGFoQGdtYWlsLmNvbSIsImV4cCI6MTY1MTAxMjU5MX0.Sv1hXav7BbwjIEo2aY6MQb8oPD11bB9cq00TQxvyhLk
+    
+    response:
+    {
+        "cart": [
+            {
+                "ID": 3,
+                "UserID": 3,
+                "ProductID": 3,
+                "User": {
+                    "ID": 0,
+                    "Categories": null,
+                    "Name": "",
+                    "Descriptions": "",
+                    "Quantity": 0,
+                    "Price": 0
+                },
+                "Product": {
+                    "ID": 0,
+                    "Categories": null,
+                    "Name": "",
+                    "Descriptions": "",
+                    "Quantity": 0,
+                    "Price": 0
+                },
+                "Quantity": 10,
+                "Price": 1700,
+                "Total": 17000
+            }
+        ],
+        "responseCode": 200,
+        "responseMsg": "List Cart successful"
+    }
+    ```
+    ![Gopher image](Doc/cart-list.png)
+    <br>
+    <br>
+    <br>
+---
+<h2>Validation</h2>
+
+Im add validation for /register, /login and /secure/cart/add for better experience
 ---
 ## Authors
 

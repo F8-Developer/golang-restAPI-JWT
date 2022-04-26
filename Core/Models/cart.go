@@ -20,15 +20,9 @@ func (crt *Cart) TableName() string {
 	return "carts"
 }
 
-// Get First Cart by return error info.
-// 	err := Models.FindCart(&cart, "cart_id")
-func FirstCart(crt *Cart) error {
-	err := Database.Mysql.First(crt).Error
-	return err
-}
-
-// Insert cart which will be saved in database returning with error info
+// Insert user and product to cart which will be saved in database returning with error info
 // 	if err := CreateCart(&Cart); err != nil { ... }
-func CreateCart(crt *Cart) error {
-	return nil
+func CartAdd(crt *Cart) error {
+	err := Database.Mysql.Save(crt).Error
+	return err
 }

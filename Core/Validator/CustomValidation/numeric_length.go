@@ -19,3 +19,18 @@ func UintLen10(fl validator.FieldLevel) bool {
 	}
 	return count <= 10
 }
+
+func IntLen11(fl validator.FieldLevel) bool {
+	inter := fl.Field()
+	slice, ok := inter.Interface().(int)
+	if !ok {
+		fmt.Println("NumLength1 failed")
+	}
+
+	count := 0
+	for slice > 0 {
+		slice = slice/10
+		count++
+	}
+	return count <= 11
+}

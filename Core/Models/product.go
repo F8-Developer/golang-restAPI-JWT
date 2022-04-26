@@ -40,8 +40,10 @@ func FirstProduct(prd *Product) error {
 func CreateProduct(prd *Product, ctg *Category) error {
 	prd.Categories = append(prd.Categories, Category{ID: ctg.ID, Name: ctg.Name, Descriptions: ctg.Name})
 	err := Database.Mysql.Create(&prd).Error
-	if err != nil {
-		return err
-	}
+	return err
+}
+
+func UpdateProductQuantity(prd *Product, qty int) error {
+	err := Database.Mysql.Model(&prd).Update("quantity", prd.Quantity+qty).Error
 	return err
 }

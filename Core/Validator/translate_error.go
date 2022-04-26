@@ -33,6 +33,8 @@ func ToErrResponse(err error, trans ut.Translator) *ErrResponse {
                 resp.Errors[i] = fmt.Sprintf("Invalid email address")
             case "uint-len-10":
                 resp.Errors[i] = fmt.Sprintf("%s numeric max length is 10", err.Field())
+            case "int-len-11":
+                resp.Errors[i] = fmt.Sprintf("%s numeric max length is 11", err.Field())
             default:
 				translatedErr := fmt.Errorf(err.Translate(trans))
 				resp.Errors[i] = translatedErr.Error()

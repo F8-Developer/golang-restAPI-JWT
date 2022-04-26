@@ -28,7 +28,7 @@ cd golang-restAPI-JWT
 # if you dont have folder vendor create new one with this command 
 mkdir vendor
 
-# install golang package in your vendor
+# install golang package in folder vendor
 go mod vendor
 ```
 
@@ -373,7 +373,7 @@ If running normally, you can access <a href="http://localhost:8080">http://local
 ---
 <h2>Validation</h2>
 
-Im add validation for /register, /login and /secure/cart/add for better experience
+Add validation for /register, /login and /secure/cart/add for better experience
 
 ---
 ## Authors

@@ -16,38 +16,43 @@ Build with golang and gin with jwt authentication. It features a simple and bett
 
 <h2>Installation</h2>
 
-* Migrate Mysql Database
+* Init workdir
 ```sh
-# import database schema from /root_folder/rest_api_db.sql to your database 
+git clone https://github.com/Ax7-cmd/golang-restAPI-JWT.git
+cd golang-restAPI-JWT
+```
 
-# Server type: MySQL
-# Server connection: SSL is not being used Documentation
-# Server version: 5.7.26 - MySQL Community Server (GPL)
-# Protocol version: 10
-# Server charset: UTF-8 Unicode (utf8)
-# Database rest_api_db Collation (utf8_general_ci)
+* Build mod Vendor
+```sh
+# make sure you have folder vendor in your root directory "golang-restAPI-JWT/vendor"
+# if you dont have folder vendor create new one with this command 
+mkdir vendor
+
+# install golang package in your vendor
+go mod vendor
 ```
 
 * Copy .env.example to .env
 ```sh
 cp .env.example .env
-# change default config .env with your local config 
+# change default config .env with your local config
 ```
 
-* Start RestAPI
+* Database Note
+```sh
+# Database will automatically migrate wwhen there is no table in you db
+```
+
+* Start restAPI 
 ```sh
 # start with default
 go run server.go
-# -env: current for enable/disable debug model.
-go run server.go -env development
 ```
-
 
 If running normally, you can access <a href="http://localhost:8080">http://localhost:8080</a>
 
-**Application details**
-
 ---
+<h2>Installation</h2>
 
 1. Server starting from server.go
    ```go

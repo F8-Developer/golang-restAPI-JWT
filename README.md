@@ -64,6 +64,7 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     | POST   | /secure/category/list   | check all category in database                    |
     | POST   | /secure/product/list    | check all product in database                     |
     | POST   | /secure/product/detail  | check product detail by product id                |
+    | POST   | /secure/cart/add        | add product to cart                               |
     | POST   | /secure/cart/list       | check user cart (get user from jwt claims email)  |
 
 2. Example Api
@@ -91,6 +92,8 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     ```
     ![Gopher image](Doc/register.png)
     <br>
+    <br>
+    <br>
     > login api : http://localhost:8080/login
 
     ```text
@@ -114,6 +117,148 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     }
     ```
     ![Gopher image](Doc/login.png)
+    <br>
+    <br>
+    <br>
+    > category list api : http://localhost:8080/secure/category/list
+
+    ```text
+    request:
+
+    POST /secure/category/list HTTP/1.1
+    Host: localhost:8080
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmFpc2hhbCBhbXJ1bGxhaCIsImVtYWlsIjoiYy5mYWlzaGFsLmFtcnVsbGFoQGdtYWlsLmNvbSIsImV4cCI6MTY1MTAxMjU5MX0.Sv1hXav7BbwjIEo2aY6MQb8oPD11bB9cq00TQxvyhLk
+    
+    response:
+    {
+        "categories": [
+            {
+                "ID": 1,
+                "Name": "buah",
+                "Descriptions": "buah"
+            },
+            {
+                "ID": 2,
+                "Name": "sayur",
+                "Descriptions": "sayur"
+            },
+            {
+                "ID": 3,
+                "Name": "rempah-rempah",
+                "Descriptions": "rempah-rempah"
+            }
+        ],
+        "responseCode": 200,
+        "responseMsg": "List Categories successful"
+    }
+    ```
+    ![Gopher image](Doc/category-list.png)
+    <br>
+    <br>
+    <br>
+    > product list api : http://localhost:8080/secure/product/list
+
+    ```text
+    request:
+
+    POST /secure/product/list HTTP/1.1
+    Host: localhost:8080
+    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmFpc2hhbCBhbXJ1bGxhaCIsImVtYWlsIjoiYy5mYWlzaGFsLmFtcnVsbGFoQGdtYWlsLmNvbSIsImV4cCI6MTY1MTAxMjU5MX0.Sv1hXav7BbwjIEo2aY6MQb8oPD11bB9cq00TQxvyhLk
+    
+    response:
+    {
+        "products": [
+            {
+                "ID": 1,
+                "Categories": [
+                    {
+                        "ID": 1,
+                        "Name": "buah",
+                        "Descriptions": "buah"
+                    }
+                ],
+                "Name": "Anggur Merah Globe",
+                "Descriptions": "Anggur Merah Globe (~0.65 kg)",
+                "Quantity": 88,
+                "Price": 56200
+            },
+            {
+                "ID": 2,
+                "Categories": [
+                    {
+                        "ID": 1,
+                        "Name": "buah",
+                        "Descriptions": "buah"
+                    }
+                ],
+                "Name": "Apel Fuji Jingle",
+                "Descriptions": "Apel Fuji Jingle (~0.3 kg)",
+                "Quantity": 100,
+                "Price": 15000
+            },
+            {
+                "ID": 3,
+                "Categories": [
+                    {
+                        "ID": 2,
+                        "Name": "sayur",
+                        "Descriptions": "sayur"
+                    }
+                ],
+                "Name": "Wortel",
+                "Descriptions": "Wortel (~0.1 kg)",
+                "Quantity": 100,
+                "Price": 1700
+            },
+            {
+                "ID": 4,
+                "Categories": [
+                    {
+                        "ID": 2,
+                        "Name": "sayur",
+                        "Descriptions": "sayur"
+                    }
+                ],
+                "Name": "Kol Putih",
+                "Descriptions": "Kol Putih (~1 kg)",
+                "Quantity": 100,
+                "Price": 18000
+            },
+            {
+                "ID": 5,
+                "Categories": [
+                    {
+                        "ID": 3,
+                        "Name": "rempah-rempah",
+                        "Descriptions": "rempah-rempah"
+                    }
+                ],
+                "Name": "Lengkuas",
+                "Descriptions": "Lengkuas (~0.2 kg)",
+                "Quantity": 100,
+                "Price": 8000
+            },
+            {
+                "ID": 6,
+                "Categories": [
+                    {
+                        "ID": 3,
+                        "Name": "rempah-rempah",
+                        "Descriptions": "rempah-rempah"
+                    }
+                ],
+                "Name": "Jahe",
+                "Descriptions": "Jahe (~0.2 kg)",
+                "Quantity": 100,
+                "Price": 10800
+            }
+        ],
+        "responseCode": 200,
+        "responseMsg": "List Products successful"
+    }
+    ```
+    <br>
+    <br>
     <br>
 
 ---

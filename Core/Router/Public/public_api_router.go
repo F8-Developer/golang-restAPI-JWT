@@ -88,7 +88,7 @@ func APIRouter(router *gin.Engine) {
 			return
 		}
 
-		// log_res = Api.LoginUser(log_req)
+		log_res = Api.LoginUser(log_req)
 		c.JSON(log_res.ResponseCode,&log_res)
 		log_req = Structs.LoginRequest{}
 	})

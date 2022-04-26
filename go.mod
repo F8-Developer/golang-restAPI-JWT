@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/Sirupsen/logrus v0.0.0-20161111120951-abc6f20dabf4
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.3.0
 	github.com/go-playground/locales v0.14.0
 	github.com/go-playground/universal-translator v0.18.0

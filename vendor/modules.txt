@@ -1,6 +1,9 @@
 # github.com/Sirupsen/logrus v0.0.0-20161111120951-abc6f20dabf4
 ## explicit
 github.com/Sirupsen/logrus
+# github.com/dgrijalva/jwt-go v3.2.0+incompatible
+## explicit
+github.com/dgrijalva/jwt-go
 # github.com/gin-contrib/sse v0.0.0-20170109093832-22d885f9ecc7
 ## explicit
 github.com/gin-contrib/sse

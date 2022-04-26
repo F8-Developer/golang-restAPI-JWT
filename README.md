@@ -40,7 +40,7 @@ cp .env.example .env
 
 * Database Note
 ```sh
-# Database will automatically migrate wwhen there is no table in you db
+# restAPI will automatically migrate when there is no table in you database
 ```
 
 * Start restAPI 
@@ -67,32 +67,30 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     | POST   | /secure/cart/list       | check user cart (get user from jwt claims email)  |
 
 2. Example Api
-   > register : http://localhost:8080/register
+   > register api : http://localhost:8080/register
 
-   ```text
+    ```text
     request:
 
-    POST /login HTTP/1.1
+    POST /register HTTP/1.1
     Host: localhost:8080
     Content-Type: application/json
-    Cache-Control: no-cache
-    Postman-Token: a70f71a7-72b9-4106-9bcd-fd2b65be1e87
+    Content-Length: 111
 
     {
-        "merchantId": "001",
-        "merchantRefCode": "JS008sKs",
-        "secureCode": "e524eea49aa125b01cbfe7f7c3bebd7b257b64abd3dc95288c3740a20c04ffc9"
+        "name": "faishal amrullah",
+        "email": "c.faishal.amrullah@gmail.com",
+        "password": "faishal123$#"
     }
     
     response:
     {
-        "merchantId": "001",
-        "merchantRefCode":"JS008sKs",
-        "token": "RTkwQjk2QzVGQUM4NDIwQzYxMDVCNDI4QUFCNTNGRkEwRkJCNDBEODA4NEIxOUQ1MTc1NjcyMTFGNDBCNUVBOQ==”,
-        "responseCode": "200",
-        "responseMsg": "Success generate token"
+        "responseCode": 200,
+        "responseMsg": "User successfully register"
     }
-   ```
+    ```
+    ![Gopher image](Doc/register.png)
+    
    >router code implement
    ```go
     router.POST("/vaonline/rest/json/gettoken", func(c *gin.Context) {

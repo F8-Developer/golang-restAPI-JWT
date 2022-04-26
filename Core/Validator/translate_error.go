@@ -31,18 +31,8 @@ func ToErrResponse(err error, trans ut.Translator) *ErrResponse {
             switch err.Tag() {
 			case "email":
                 resp.Errors[i] = fmt.Sprintf("Invalid email address")
-            // case "int-length-1":
-            //     resp.Errors[i] = fmt.Sprintf("%s numeric max length is 1%s", err.Field(), err.Param())
-            // case "int-length-5":
-            //     resp.Errors[i] = fmt.Sprintf("%s numeric max length is 5%s", err.Field(), err.Param())
-            // case "int-length-10":
-            //     resp.Errors[i] = fmt.Sprintf("%s numeric max length is 10%s", err.Field(), err.Param())
-            // case "uint64-length-18":
-            //     resp.Errors[i] = fmt.Sprintf("%s numeric max length is 18%s", err.Field(), err.Param())
-            // case "float-decimal-val":
-            //     resp.Errors[i] = fmt.Sprintf("%s numeric decimal format (two decimal), ex : 1000.00%s", err.Field(), err.Param())
-            // case "date-format":
-            //     resp.Errors[i] = fmt.Sprintf("%s date format invalid, ex : YYYY-MM-DD%s", err.Field(), err.Param())
+            case "uint-len-10":
+                resp.Errors[i] = fmt.Sprintf("%s numeric max length is 10", err.Field())
             default:
 				translatedErr := fmt.Errorf(err.Translate(trans))
 				resp.Errors[i] = translatedErr.Error()

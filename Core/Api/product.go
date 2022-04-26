@@ -18,3 +18,17 @@ func GetAllProducts() (prs_res Structs.ProductsResponse) {
 	prs_res.Products = products
 	return prs_res;
 }
+
+func GetProductDetail(prd_req Structs.ProductDetailRequest) (prd_res Structs.ProductDetailResponse) {
+	prd_res.ResponseCode = 200
+	prd_res.ResponseMsg = "Product detail successful"
+	var product Models.Product
+	err := Models.FindProduct(&product, prd_req.ProductID)
+	if err != nil {
+		prd_res.ResponseCode = 205
+		prd_res.ResponseMsg = err.Error()
+	}
+
+	prd_res.Product = product
+	return prd_res;
+}

@@ -15,6 +15,11 @@ func (ctg *Category) TableName() string {
 	return "categories"
 }
 
+func FindAllCategories(ctg *[]Category) error {
+	err := Database.Mysql.Find(&ctg).Error
+	return err
+}
+
 // Get First Category by return error info.
 // 	err := Models.FindCategory(&category, "category_id")
 func FirstCategory(ctg *Category) error {

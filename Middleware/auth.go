@@ -1,8 +1,6 @@
 package Middleware
 
 import (
-	"fmt"
-
 	jwtAuth "golang-restAPI-JWT/Auth"
 	"github.com/gin-gonic/gin"
 )
@@ -12,7 +10,6 @@ func Auth() gin.HandlerFunc{
 		const BEARER_SCHEMA = "Bearer "
 		authHeader := context.GetHeader("Authorization")
 		tokenString := authHeader[len(BEARER_SCHEMA):]
-		fmt.Println(tokenString)
 		if tokenString == "" {
 			context.JSON(401, gin.H{"error": "Not Authorized"})
 			context.Abort()

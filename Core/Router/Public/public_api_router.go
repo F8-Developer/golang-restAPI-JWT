@@ -12,23 +12,13 @@ import (
 	"golang-restAPI-JWT/Core/Validator"
 	cv "golang-restAPI-JWT/Core/Validator/CustomValidation"
 	"golang-restAPI-JWT/Core/Api"
-	// "golang-restAPI-JWT/Core/Utils"
 )
 
 var (
 	reg_req Structs.RegisterRequest
 	reg_res Structs.RegisterResponse
-
-	// dv_req Structs.DisableVaRequest
-	// dv_res Structs.DisableVaResponse
-	// gt_req Structs.GetTokenRequest
-	// gt_res Structs.GetTokenResponse
-	// gv_req Structs.GenerateVaRequest
-	// gv_res Structs.GenerateVaResponse
-	// gvp_req Structs.GetVaPaymentStatusRequest
-	// gvp_res Structs.GetVaPaymentStatusResponse
-	// uv_req Structs.UpdateVaRequest
-	// uv_res Structs.UpdateVaResponse
+	log_req Structs.LoginRequest
+	log_res Structs.LoginResponse
 )
 
 // APIRouter define router from here, you can add new api about your new services.
@@ -39,12 +29,6 @@ func APIRouter(router *gin.Engine) {
 	uni := ut.New(english, english)
 	trans, _ := uni.GetTranslator("en")
 	validate.RegisterValidation("email", cv.Email)
-	validate.RegisterValidation("int-length-1", cv.IntLen1)
-	validate.RegisterValidation("int-length-5", cv.IntLen5)
-	validate.RegisterValidation("int-length-10", cv.IntLen10)
-	validate.RegisterValidation("uint64-length-18", cv.Uint64Len18)
-	validate.RegisterValidation("float-decimal-val", cv.FloatDecimalVal)
-	validate.RegisterValidation("date-format", cv.DateFormat)
 	_ = en_translations.RegisterDefaultTranslations(validate, trans)
 	// end set validator
 
@@ -82,130 +66,31 @@ func APIRouter(router *gin.Engine) {
 		reg_req = Structs.RegisterRequest{}
 	})
 
-	// // DEFAULT ROUTE
-	// router.POST("/vaonline/rest/json/gettoken", func(c *gin.Context) {
-	// 	// using BindJson method to serialize body with struct
-	// 	if err := c.BindJSON(&gt_req); err != nil {
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": err.Error(),
-	// 		})
-	// 		gt_req = Structs.GetTokenRequest{}
-	// 		return
-	// 	}
-	// 	if err := validate.Struct(gt_req); err != nil {
-	// 		errs := Validator.ToErrResponse(err, trans)
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": errs,
-	// 		})
-	// 		gt_req = Structs.GetTokenRequest{}
-	// 		return
-	// 	}
-		
-	// 	gt_res = VaOnline.GenerateToken(gt_req)
-	// 	c.JSON(gt_res.ResponseCode,&gt_res)
-	// 	gt_req = Structs.GetTokenRequest{}
-	// })
 
-	// router.POST("/vaonline/rest/json/generateva", func(c *gin.Context) {
-	// 	// validate token
-	// 	request := c.Request.URL.Query()
-	// 	if !Utils.ValidateToken(request.Get("t")) {
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": "Not Authorized!",
-	// 		})
-	// 		gv_req = Structs.GenerateVaRequest{}
-	// 		return
-	// 	}
+	router.POST("/login", func(c *gin.Context) {
+		// using BindJson method to serialize body with struct
+		if err := c.BindJSON(&log_req); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"responseCode": 201,
+				"error": err.Error(),
+			})
+			log_req = Structs.LoginRequest{}
+			return
+		}
 
-	// 	// using BindJson method to serialize body with struct
-	// 	if err := c.BindJSON(&gv_req); err != nil {
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": err.Error(),
-	// 		})
-	// 		gv_req = Structs.GenerateVaRequest{}
-	// 		return
-	// 	}
-	// 	if err := validate.Struct(gv_req); err != nil {
-	// 		errs := Validator.ToErrResponse(err, trans)
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": errs,
-	// 		})
-	// 		gv_req = Structs.GenerateVaRequest{}
-	// 		return
-	// 	}
+		if err := validate.Struct(log_req); err != nil {
+			errs := Validator.ToErrResponse(err, trans)
+			c.JSON(http.StatusBadRequest, gin.H{
+				"responseCode": 202,
+				"error": errs,
+			})
+			log_req = Structs.LoginRequest{}
+			return
+		}
 
-	// 	gv_res = VaOnline.GenerateVa(gv_req)
-	// 	c.JSON(http.StatusOK,&gv_res)
-	// 	gv_req = Structs.GenerateVaRequest{}
-	// })
-
-	// router.POST("/vaonline/rest/json/getstatus", func(c *gin.Context) {
-	// 	// using BindJson method to serialize body with struct
-	// 	if err := c.BindJSON(&gvp_req); err != nil {
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": err.Error(),
-	// 		})
-	// 		gvp_req = Structs.GetVaPaymentStatusRequest{}
-	// 		return
-	// 	}
-	// 	if err := validate.Struct(gvp_req); err != nil {
-	// 		errs := Validator.ToErrResponse(err, trans)
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": errs,
-	// 		})
-	// 		gvp_req = Structs.GetVaPaymentStatusRequest{}
-	// 		return
-	// 	}
-
-	// 	gvp_res = VaOnline.GetVaPaymentStatus(gvp_req)
-	// 	c.JSON(http.StatusOK,&gvp_res)
-	// 	gvp_req = Structs.GetVaPaymentStatusRequest{}
-	// })
-
-	// router.POST("/vaonline/rest/json/disableVA", func(c *gin.Context) {
-	// 	// using BindJson method to serialize body with struct
-	// 	if err := c.BindJSON(&dv_req); err != nil {
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": err.Error(),
-	// 		})
-	// 		dv_req = Structs.DisableVaRequest{}
-	// 		return
-	// 	}
-	// 	if err := validate.Struct(dv_req); err != nil {
-	// 		errs := Validator.ToErrResponse(err, trans)
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": errs,
-	// 		})
-	// 		dv_req = Structs.DisableVaRequest{}
-	// 		return
-	// 	}
-
-	// 	dv_res = VaOnline.DisableVa(dv_req)
-	// 	c.JSON(http.StatusOK,&dv_res)
-	// 	dv_req = Structs.DisableVaRequest{}
-	// })
-
-	// router.POST("/vaonline/rest/json/updateVA", func(c *gin.Context) {
-	// 	// using BindJson method to serialize body with struct
-	// 	if err := c.BindJSON(&uv_req); err != nil {
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": err.Error(),
-	// 		})
-	// 		uv_req = Structs.UpdateVaRequest{}
-	// 		return
-	// 	}
-	// 	if err := validate.Struct(uv_req); err != nil {
-	// 		errs := Validator.ToErrResponse(err, trans)
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"error": errs,
-	// 		})
-	// 		uv_req = Structs.UpdateVaRequest{}
-	// 		return
-	// 	}
-
-	// 	uv_res = VaOnline.UpdateVa(uv_req)
-	// 	c.JSON(http.StatusOK,&uv_res)
-	// 	uv_req = Structs.UpdateVaRequest{}
-	// })
+		// log_res = Api.LoginUser(log_req)
+		c.JSON(log_res.ResponseCode,&log_res)
+		log_req = Structs.LoginRequest{}
+	})
 	// // END DEFAULT ROUTE
 }

@@ -1,12 +1,12 @@
 package Structs
 
-type RegisterRequest struct {
-	Name		string `json:"name" validate:"required,alphanum,max=255"`
+type LoginRequest struct {
     Email		string `json:"email" validate:"required,email,max=255"`
 	Password	string `json:"password" validate:"required,max=100"`
 }
 
-type RegisterResponse struct {
+type LoginResponse struct {
+	Token			string	`json:"token"`
 	ResponseCode	int		`json:"responseCode"`
 	ResponseMsg		string	`json:"responseMsg"`
 }

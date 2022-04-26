@@ -2,11 +2,11 @@ package Router
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/gin-gonic/gin"
 	"golang-restAPI-JWT/Core/Router/Public"
 	"golang-restAPI-JWT/Middleware"
+	"golang-restAPI-JWT/Config"
 )
 
 // Varible define to here
@@ -15,7 +15,7 @@ var (
 )
 
 func init() {
-	LisAddr = os.Getenv("ADDRESS")
+	LisAddr = Config.GoDotEnvVariable("APP_ADDRESS")
 	if LisAddr == "" {
 		LisAddr = "0.0.0.0:8080"
 	}

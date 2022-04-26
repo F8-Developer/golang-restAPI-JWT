@@ -6,11 +6,11 @@ import (
 )
 
 type User struct {
-	ID				uint `gorm:"primaryKey"`
-	Name			string `gorm:"column:name"`
-	Email			string `gorm:"column:email;unique_index"`
-	Password		string `gorm:"column:password"`
-	RememberToken	string `gorm:"column:remember_token"`
+	ID				uint	`gorm:"primaryKey"`
+	Name			string	`gorm:"column:name"`
+	Email			string	`gorm:"column:email;unique_index"`
+	Password		string	`gorm:"column:password"`
+	RememberToken	string	`gorm:"column:remember_token"`
 }
 
 func (usr *User) TableName() string {

@@ -52,87 +52,22 @@ go run server.go
 If running normally, you can access <a href="http://localhost:8080">http://localhost:8080</a>
 
 ---
-<h2>Installation</h2>
+<h2>Rest API</h2>
 
-1. Server starting from server.go
-   ```go
-    package main
-    import (
-        "fmt"
-        "net"
+1. Endpoint
 
-        mgrpc "golang-restAPI-JWT/Core/Grpc"
-        log "github.com/Sirupsen/logrus"
-        pb "golang-restAPI-JWT/Core/Grpc/Services"
-        
-        "golang-restAPI-JWT/Config"
-        "golang-restAPI-JWT/Core/Router"
-        "google.golang.org/grpc"
-    )
+    | METHOD | URL                     | INFO                                              |
+    | ------ | :-------------          | :-------------                                    |
+    | GET    | /                       | index pa                                          |
+    | POST   | /register               | for create user                                   |
+    | POST   | /login                  | login user and generate jwt token                 |
+    | POST   | /secure/category/list   | check all category in database                    |
+    | POST   | /secure/product/list    | check all product in database                     |
+    | POST   | /secure/product/detail  | check product detail by product id                |
+    | POST   | /secure/cart/list       | check user cart (get user from jwt claims email)  |
 
-    // Api server start from here. router is define your api router and public it.
-    func main() {
-        // GRPC
-        // Here will enable grpc server, if you don`t want it, you can disable it
-        go func() {
-            lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", 10000))
-            if err != nil {
-                log.Fatalf("failed to listen: %v", err)
-            }
-            var opts []grpc.ServerOption
-            grpcServer := grpc.NewServer(opts...)
-            pb.RegisterRouteGuideServer(grpcServer, mgrpc.NewServer())
-            grpcServer.Serve(lis)
-        }()
-        app_env := config.GoDotEnvVariable("APP_ENV")
-
-        // HTPP
-        // start api server, *env is what`s environment will running, currentlly this only for enable or disable debug modle
-        // After may be use it load different varible.
-        router.Start(app_env)
-    }
-   ```
-2. Project code structure
-
-    | folder        | content                                   |
-    | ------------- |:-------------                             |
-    | conf          | put some application configure to here    |
-    | core          | put core sources to here(api, grpc, etc)  |
-    | database      | here database connection and globar var   |
-    | middleware    | put middleware code to here, like cors    |
-    | logs          | here will save console log                |
-    | vendor        | here is save third party                  |
-    | doc           | here is save some document about project  |
-
-3. Router define
-   
-   Router, It`s like your application gate, help you dispatch all request to target service.
-   >go to apigateway/core/router/router.go, you can define your router.
-
-    ```go
-    func Start(env string) {
-        // enable debug/release mode
-        switch env {
-        case "development":
-            gin.SetMode(gin.DebugMode)
-        default:
-            gin.SetMode(gin.ReleaseMode)
-            fmt.Printf("Start prod mode...\nServer listen on: %v", LisAddr)
-        }
-
-        router := gin.New()
-        router.Use(gin.Logger())
-        router.Use(gin.Recovery())
-        router.Use(middleware.CORSMiddleware())
-        router.Use(middleware.LoggerApp())
-        //No Permission Validation
-        public.APIRouter(router)
-
-        router.Run(LisAddr)
-    }
-    ```
-4. Example Api
-   > gettoken api: http://localhost:8080/vaonline/rest/json/gettoken
+2. Example Api
+   > register : http://localhost:8080/register
 
    ```text
     request:

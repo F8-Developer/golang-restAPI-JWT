@@ -7,9 +7,9 @@ import (
 
 type Cart struct {
 	ID			uint	`gorm:"primaryKey"`
-	UserID		uint	`gorm:"column:user_id"`
-	ProductID	uint	`gorm:"column:product_id"`
-	User		Product	`gorm:"foreignKey:UserID"`
+	UserID		uint	`json:"-";gorm:"column:user_id"`
+	ProductID	uint	`json:"-";gorm:"column:product_id"`
+	User		User	`gorm:"foreignKey:UserID"`
 	Product		Product	`gorm:"foreignKey:ProductID"`
 	Quantity	int		`gorm:"column:quantity"`
 	Price		float64	`gorm:"column:price;type:decimal(18,2);"`
@@ -21,7 +21,7 @@ func (crt *Cart) TableName() string {
 }
 
 func FindCartByUserID(UserID uint, crt *[]Cart) error {
-	err := Database.Mysql.Where("user_id = ?", UserID).Find(&crt).Error
+	err := Database.Mysql.Where("user_id = ?", UserID).Preload("User").Preload("Product.Categories").Find(&crt).Error
 	return err
 }
 

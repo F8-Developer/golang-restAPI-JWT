@@ -18,6 +18,16 @@ func (prd *Product) TableName() string {
 	return "products"
 }
 
+func FindAllProducts(prd *[]Product) error {
+	err := Database.Mysql.Preload("Categories").Find(&prd).Error
+	return err
+}
+
+func FindProduct(prd *Product, id uint) error {
+	err := Database.Mysql.Preload("Categories").First(&prd, id).Error
+	return err
+}
+
 // Get First Product by return error info.
 // 	err := Models.FindProduct(&product, "product_id")
 func FirstProduct(prd *Product) error {

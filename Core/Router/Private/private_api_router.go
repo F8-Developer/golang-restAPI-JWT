@@ -16,6 +16,7 @@ import (
 
 var (
 	cas_res Structs.CategoriesResponse
+	prs_res Structs.ProductsResponse
 )
 
 // APIRouter define router from here, you can add new api about your new services.
@@ -30,9 +31,14 @@ func APIRouter(router *gin.Engine) {
 	// end set validator
 
 	authorized := router.Group("/secure").Use(Middleware.Auth())
-	// /admin/secrets endpoint
+	//secure endpoint with jwt token
 	authorized.POST("/category/list", func(c *gin.Context) {
 		cas_res = Api.GetAllCategories()
 		c.JSON(cas_res.ResponseCode,&cas_res)
+	})
+	
+	authorized.POST("/product/list", func(c *gin.Context) {
+		prs_res = Api.GetAllProducts()
+		c.JSON(prs_res.ResponseCode,&prs_res)
 	})
 }

@@ -9,7 +9,6 @@ import (
 	
 	"golang-restAPI-JWT/Config"
 	"golang-restAPI-JWT/Database"
-	// "golang-restAPI-JWT/Core/Utils/Redis"
 	"golang-restAPI-JWT/Core/Router"
 	"golang-restAPI-JWT/Core/Models"
 	"google.golang.org/grpc"
@@ -25,7 +24,7 @@ func main() {
 		fmt.Println("database connected")
 	}
 	defer Database.Mysql.Close()
-	Database.Mysql.AutoMigrate(&Models.MerchantVa{})
+	Database.Mysql.AutoMigrate(&Models.User{})
 	// // Redis DB
 	// Redis.Client = Redis.NewClient()
 

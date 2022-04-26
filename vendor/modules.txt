@@ -1,16 +1,6 @@
 # github.com/Sirupsen/logrus v0.0.0-20161111120951-abc6f20dabf4
 ## explicit
 github.com/Sirupsen/logrus
-# github.com/boj/redistore v0.0.0-20160128113310-fc113767cd6b
-## explicit
-# github.com/coreos/etcd v0.0.0-20170403004131-38a914973544
-## explicit
-# github.com/coreos/go-semver v0.0.0-20170209201757-5e3acbb5668c
-## explicit
-# github.com/garyburd/redigo v0.0.0-20161024014702-80f7de34463b
-## explicit
-# github.com/gin-contrib/sessions v0.0.0-20180702031852-da25b7bed527
-## explicit
 # github.com/gin-contrib/sse v0.0.0-20170109093832-22d885f9ecc7
 ## explicit
 github.com/gin-contrib/sse
@@ -54,12 +44,6 @@ github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
-# github.com/gorilla/context v1.1.1
-## explicit
-# github.com/gorilla/securecookie v0.0.0-20161003051601-fa5329f91370
-## explicit
-# github.com/gorilla/sessions v0.0.0-20160922145804-ca9ada445741
-## explicit
 # github.com/jinzhu/gorm v1.9.16
 ## explicit; go 1.12
 github.com/jinzhu/gorm
@@ -78,8 +62,6 @@ github.com/leodido/go-urn
 # github.com/mattn/go-isatty v0.0.4
 ## explicit
 github.com/mattn/go-isatty
-# github.com/mitchellh/mapstructure v0.0.0-20180111000720-b4575eea38cc
-## explicit
 # github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
 ## explicit
 github.com/modern-go/concurrent
@@ -93,10 +75,12 @@ github.com/modern-go/reflect2
 # github.com/ugorji/go v0.0.0-20170312112114-708a42d24682
 ## explicit
 github.com/ugorji/go/codec
-# golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
+# golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
 ## explicit; go 1.17
+golang.org/x/crypto/bcrypt
+golang.org/x/crypto/blowfish
 golang.org/x/crypto/sha3
-# golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
+# golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2
 ## explicit; go 1.17
 golang.org/x/net/context
 golang.org/x/net/http/httpguts
@@ -186,10 +170,6 @@ google.golang.org/protobuf/types/known/timestamppb
 # gopkg.in/go-playground/validator.v8 v8.18.2
 ## explicit
 gopkg.in/go-playground/validator.v8
-# gopkg.in/mgo.v2 v2.0.0-20160818020120-3f83fa500528
-## explicit
-# gopkg.in/tomb.v2 v2.0.0-20161208151619-d5d1b5820637
-## explicit
 # gopkg.in/yaml.v2 v2.4.0
 ## explicit; go 1.15
 gopkg.in/yaml.v2

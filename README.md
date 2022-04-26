@@ -1,12 +1,11 @@
 # [Merchant Api Gateway]:
 
-Its clone form [nightlegend/apigateway](https://github.com/nightlegend/apigateway). Build with golang and gin. It features a simple and better performance, and customize with requirements needed.
+Build with golang and gin with jwt authentication. It features a simple and better performance, and customize with requirements needed.
 
 <br>
 
-<h1>Design</h1>
+<h1>Installation</h1>
 
-![Gopher image](Doc/apigateway.jpg)
 
 <h1>How to run ?</h1>
 

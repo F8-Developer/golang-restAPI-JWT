@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"golang-restAPI-JWT/Core/Router/Public"
+	"golang-restAPI-JWT/Core/Router/Private"
 	"golang-restAPI-JWT/Middleware"
 	"golang-restAPI-JWT/Config"
 )
@@ -39,6 +40,7 @@ func Start(env string) {
 	router.Use(Middleware.LoggerApp())
 	//No Permission Validation
 	Public.APIRouter(router)
+	Private.APIRouter(router)
 
 	router.Run(LisAddr)
 }

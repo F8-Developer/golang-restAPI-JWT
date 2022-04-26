@@ -23,6 +23,7 @@ var (
 	prd_res Structs.ProductDetailResponse
 	ca_req Structs.CartAddRequest
 	ca_res Structs.CartAddResponse
+	cl_res Structs.CartListResponse
 )
 
 // APIRouter define router from here, you can add new api about your new services.
@@ -73,6 +74,25 @@ func APIRouter(router *gin.Engine) {
 		prd_res = Api.GetProductDetail(prd_req)
 		c.JSON(prd_res.ResponseCode,&prd_res)
 		prd_req = Structs.ProductDetailRequest{}
+	})
+
+	authorized.POST("/cart/list", func(c *gin.Context) {
+		// get user email from jwt
+		const BEARER_SCHEMA = "Bearer "
+		authHeader := c.GetHeader("Authorization")
+		tokenString := authHeader[len(BEARER_SCHEMA):]
+		email, err := Auth.GetEmail(tokenString)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"responseCode": 201,
+				"error": err.Error(),
+			})
+			ca_req = Structs.CartAddRequest{}
+			return
+		}
+		
+		cl_res = Api.GetCart(email)
+		c.JSON(cl_res.ResponseCode,&cl_res)
 	})
 
 	authorized.POST("/cart/add", func(c *gin.Context) {

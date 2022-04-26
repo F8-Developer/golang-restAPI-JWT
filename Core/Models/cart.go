@@ -20,6 +20,11 @@ func (crt *Cart) TableName() string {
 	return "carts"
 }
 
+func FindCartByUserID(UserID uint, crt *[]Cart) error {
+	err := Database.Mysql.Where("user_id = ?", UserID).Find(&crt).Error
+	return err
+}
+
 // Insert user and product to cart which will be saved in database returning with error info
 // 	if err := CreateCart(&Cart); err != nil { ... }
 func CartAdd(crt *Cart) error {

@@ -259,7 +259,7 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     ```
     <br>
     <br>
-    <br>
+    
     > product detail api : http://localhost:8080/secure/product/detail
 
     ```text
@@ -374,6 +374,7 @@ If running normally, you can access <a href="http://localhost:8080">http://local
 <h2>Validation</h2>
 
 Im add validation for /register, /login and /secure/cart/add for better experience
+
 ---
 ## Authors
 

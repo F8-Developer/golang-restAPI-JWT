@@ -1,20 +1,31 @@
-# [Merchant Api Gateway]:
+# [Golang RestAPI with JWT]:
 
 Build with golang and gin with jwt authentication. It features a simple and better performance, and customize with requirements needed.
 
+### Required
+
+ * GO 1.17.5 - [go1.17.5](https://go.dev/doc/devel/release#go1.17).
+
+### Using
+
+- Gin Web Framework 1.3.0 - [Gin-Gionic](https://github.com/gin-gonic/gin)
+- MySQL 5.7.26 - [MySQL](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-26.html)
+- Go Validator v10 - [go-validator](https://github.com/go-playground/validator)
+
 <br>
 
-<h1>Installation</h1>
+<h2>Installation</h2>
 
-
-<h1>How to run ?</h1>
-
-<h2>Start APIGATEWAY</h2>
-
-* Init workdir
+* Migrate Mysql Database
 ```sh
-git clone git@github.com:Nomina-VIp/merchant-api-gateway.git
-cd merchant-api-gateway
+# import database schema from /root_folder/rest_api_db.sql to your database 
+
+# Server type: MySQL
+# Server connection: SSL is not being used Documentation
+# Server version: 5.7.26 - MySQL Community Server (GPL)
+# Protocol version: 10
+# Server charset: UTF-8 Unicode (utf8)
+# Database rest_api_db Collation (utf8_general_ci)
 ```
 
 * Copy .env.example to .env
@@ -23,7 +34,7 @@ cp .env.example .env
 # change default config .env with your local config 
 ```
 
-* Start APIGATEWAY
+* Start RestAPI
 ```sh
 # start with default
 go run server.go
@@ -45,12 +56,12 @@ If running normally, you can access <a href="http://localhost:8080">http://local
         "fmt"
         "net"
 
-        mgrpc "merchant-api-gateway/Core/Grpc"
+        mgrpc "golang-restAPI-JWT/Core/Grpc"
         log "github.com/Sirupsen/logrus"
-        pb "merchant-api-gateway/Core/Grpc/Services"
+        pb "golang-restAPI-JWT/Core/Grpc/Services"
         
-        "merchant-api-gateway/Config"
-        "merchant-api-gateway/Core/Router"
+        "golang-restAPI-JWT/Config"
+        "golang-restAPI-JWT/Core/Router"
         "google.golang.org/grpc"
     )
 

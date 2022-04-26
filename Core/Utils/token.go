@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"encoding/base64"
 	"crypto/sha256"
-	"merchant-api-gateway/Core/Models"
-	"merchant-api-gateway/Core/Utils/Redis"
+	"golang-restAPI-JWT/Core/Models"
+	"golang-restAPI-JWT/Core/Utils/Redis"
 )
 
 func GenerateToken(merchant_refcode string, merchant_va Models.MerchantVa) (string, string) {

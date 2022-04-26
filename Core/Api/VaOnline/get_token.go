@@ -3,10 +3,10 @@ package VaOnline
 import (
 	"fmt"
 	"time"
-	"merchant-api-gateway/Core/Structs"
-	"merchant-api-gateway/Core/Models"
-	"merchant-api-gateway/Core/Utils"
-	"merchant-api-gateway/Core/Utils/Redis"
+	"golang-restAPI-JWT/Core/Structs"
+	"golang-restAPI-JWT/Core/Models"
+	"golang-restAPI-JWT/Core/Utils"
+	"golang-restAPI-JWT/Core/Utils/Redis"
 )
 
 // Register register one new user in db, return a boolean value to make know success or not.

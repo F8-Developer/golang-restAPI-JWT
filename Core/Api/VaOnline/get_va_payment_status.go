@@ -1,7 +1,7 @@
 package VaOnline
 
 import (
-	"merchant-api-gateway/Core/Structs"
+	"golang-restAPI-JWT/Core/Structs"
 )
 
 // Register register one new user in db, return a boolean value to make know success or not.

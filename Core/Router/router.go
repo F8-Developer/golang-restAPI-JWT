@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"merchant-api-gateway/Core/Router/Public"
-	"merchant-api-gateway/Middleware"
+	"golang-restAPI-JWT/Core/Router/Public"
+	"golang-restAPI-JWT/Middleware"
 )
 
 // Varible define to here

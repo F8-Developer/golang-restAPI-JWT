@@ -5,7 +5,7 @@ import (
 	"crypto/sha1"
 	"crypto/sha256"
 	"strconv"
-	"merchant-api-gateway/Core/Models"
+	"golang-restAPI-JWT/Core/Models"
 )
 
 func SecureCodeCheck(secure_code string, merchant_refcode string, merchant_va Models.MerchantVa) bool {

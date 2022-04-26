@@ -1,4 +1,4 @@
-module merchant-api-gateway
+module golang-restAPI-JWT
 
 go 1.17
 

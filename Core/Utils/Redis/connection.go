@@ -2,7 +2,7 @@ package Redis
 
 import (
 	log "github.com/Sirupsen/logrus"
-	"merchant-api-gateway/Config"
+	"golang-restAPI-JWT/Config"
 	"github.com/go-redis/redis"
 )
 

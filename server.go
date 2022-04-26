@@ -3,15 +3,15 @@ import (
 	"fmt"
 	"net"
 
-	mgrpc "merchant-api-gateway/Core/Grpc"
+	mgrpc "golang-restAPI-JWT/Core/Grpc"
 	log "github.com/Sirupsen/logrus"
-	pb "merchant-api-gateway/Core/Grpc/Services"
+	pb "golang-restAPI-JWT/Core/Grpc/Services"
 	
-	"merchant-api-gateway/Config"
-	"merchant-api-gateway/Database"
-	"merchant-api-gateway/Core/Utils/Redis"
-	"merchant-api-gateway/Core/Router"
-	"merchant-api-gateway/Core/Models"
+	"golang-restAPI-JWT/Config"
+	"golang-restAPI-JWT/Database"
+	// "golang-restAPI-JWT/Core/Utils/Redis"
+	"golang-restAPI-JWT/Core/Router"
+	"golang-restAPI-JWT/Core/Models"
 	"google.golang.org/grpc"
 )
 
@@ -26,8 +26,8 @@ func main() {
 	}
 	defer Database.Mysql.Close()
 	Database.Mysql.AutoMigrate(&Models.MerchantVa{})
-	// Redis DB
-	Redis.Client = Redis.NewClient()
+	// // Redis DB
+	// Redis.Client = Redis.NewClient()
 
 	// GRPC
 	// Here will enable grpc server, if you don`t want it, you can disable it
@@ -43,8 +43,5 @@ func main() {
 	}()
 	app_env := Config.GoDotEnvVariable("APP_ENV")
 
-	// HTPP
-	// start api server, *env is what`s environment will running, currentlly this only for enable or disable debug modle
-	// After may be use it load different varible.
 	Router.Start(app_env)
 }

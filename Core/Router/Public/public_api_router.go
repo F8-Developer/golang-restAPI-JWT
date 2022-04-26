@@ -8,11 +8,11 @@ import (
 	ut "github.com/go-playground/universal-translator"
 	en_translations "github.com/go-playground/validator/v10/translations/en"
 
-	"merchant-api-gateway/Core/Structs"
-	"merchant-api-gateway/Core/Validator"
-	cv "merchant-api-gateway/Core/Validator/CustomValidation"
-	"merchant-api-gateway/Core/Api/VaOnline"
-	"merchant-api-gateway/Core/Utils"
+	"golang-restAPI-JWT/Core/Structs"
+	"golang-restAPI-JWT/Core/Validator"
+	cv "golang-restAPI-JWT/Core/Validator/CustomValidation"
+	"golang-restAPI-JWT/Core/Api/VaOnline"
+	"golang-restAPI-JWT/Core/Utils"
 )
 
 var (

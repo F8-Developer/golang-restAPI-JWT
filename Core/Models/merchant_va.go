@@ -1,7 +1,7 @@
 package Models
 
 import (
-	"merchant-api-gateway/Database"
+	"golang-restAPI-JWT/Database"
 	"github.com/jinzhu/gorm"
 	_ "github.com/go-sql-driver/mysql"
 )

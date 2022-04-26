@@ -1,8 +1,8 @@
 package VaOnline
 
 import (
-	"merchant-api-gateway/Core/Structs"
-	"merchant-api-gateway/Config"
+	"golang-restAPI-JWT/Core/Structs"
+	"golang-restAPI-JWT/Config"
 	"io/ioutil"
 	"net/http"
 	"encoding/json"

@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	pb "merchant-api-gateway/Core/Grpc/Services"
+	pb "golang-restAPI-JWT/Core/Grpc/Services"
 )
 
 // RouteGuideServer is route object

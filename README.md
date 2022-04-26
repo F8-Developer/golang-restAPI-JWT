@@ -90,62 +90,33 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     }
     ```
     ![Gopher image](Doc/register.png)
+    <br>
+    > login api : http://localhost:8080/login
+
+    ```text
+    request:
+
+    POST /login HTTP/1.1
+    Host: localhost:8080
+    Content-Type: application/json
+    Content-Length: 81
+
+    {
+        "email" : "c.faishal.amrullah@gmail.com",
+        "password" : "faishal123$#"
+    }
     
-   >router code implement
-   ```go
-    router.POST("/vaonline/rest/json/gettoken", func(c *gin.Context) {
-		// using BindJson method to serialize body with struct
-		if err := c.BindJSON(&gt_req); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
-			})
-			gt_req = structs.GetTokenRequest{}
-			return
-		}
-		if err := validate.Struct(gt_req); err != nil {
-			errs := validator.ToErrResponse(err, trans)
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": errs,
-			})
-			gt_req = structs.GetTokenRequest{}
-			return
-		}
-		
-		gt_res = vaonline.GenerateToken(gt_req)
-		c.JSON(http.StatusOK,&gt_res)
-		gt_req = structs.GetTokenRequest{}
-	})
-   ```
-
-**GRPC**
->Implement [grpc](https://grpc.io) function, A high performance, open-source universal RPC framework
-
-1. How to start grpc whith go?
-   [GRPC-go-guideline](https://grpc.io/docs/quickstart/go.html)
-
-2. How to enable grpc?
-   > Go to server.go, you will saw below sample code, if don`t want enable it, you can comment it.
-   ```go
-   go func() {
-		lis, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", 10000))
-		if err != nil {
-			log.Fatalf("failed to listen: %v", err)
-		}
-		var opts []grpc.ServerOption
-		grpcServer := grpc.NewServer(opts...)
-		pb.RegisterRouteGuideServer(grpcServer, mgrpc.NewServer())
-		grpcServer.Serve(lis)
-	}()
-   ```
-3. About grpc here
-   For now, It`s just a sample code, and export an api to testing. 
-
-4. GRPC-go environment by docker
-    If you want a generate grpc code env, you can go to [here](https://hub.docker.com/r/nightlegend/grpc-go/).
-
+    response:
+    {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZmFpc2hhbCBhbXJ1bGxhaCIsImVtYWlsIjoiYy5mYWlzaGFsLmFtcnVsbGFoQGdtYWlsLmNvbSIsImV4cCI6MTY1MTAxMjU5MX0.Sv1hXav7BbwjIEo2aY6MQb8oPD11bB9cq00TQxvyhLk",
+        "responseCode": 200,
+        "responseMsg": "User successfully login"
+    }
+    ```
+    ![Gopher image](Doc/login.png)
+    <br>
 
 ---
 ## Authors
 
 * **Ax7-cmd** - *Initial work* - [Ax7](https://github.com/Ax7-cmd).
-* *Backend dev*

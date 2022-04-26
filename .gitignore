@@ -7,3 +7,4 @@ debug
 .vscode/launch.json
 testdata/*
 .env
+vendor

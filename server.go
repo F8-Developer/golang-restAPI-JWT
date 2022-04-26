@@ -9,6 +9,7 @@ import (
 	
 	"golang-restAPI-JWT/Config"
 	"golang-restAPI-JWT/Database"
+	"golang-restAPI-JWT/Database/Seed"
 	"golang-restAPI-JWT/Core/Router"
 	"golang-restAPI-JWT/Core/Models"
 	"google.golang.org/grpc"
@@ -24,7 +25,23 @@ func main() {
 		fmt.Println("database connected")
 	}
 	defer Database.Mysql.Close()
+	// auto migrate
 	Database.Mysql.AutoMigrate(&Models.User{})
+	Database.Mysql.AutoMigrate(&Models.Category{})
+	Database.Mysql.AutoMigrate(&Models.Product{})
+	Database.Mysql.AutoMigrate(&Models.Cart{})
+	var category Models.Category
+	var product Models.Product
+	err := Models.FirstCategory(&category)
+	err = Models.FirstProduct(&product)
+	if err != nil && category.Name == "" && product.Name == "" {
+		err = Seed.CategoryProductSeed()
+		if err != nil {
+			fmt.Println("seeder error : ", err)
+		}
+	}
+
+
 	// // Redis DB
 	// Redis.Client = Redis.NewClient()
 

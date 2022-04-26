@@ -338,24 +338,24 @@ If running normally, you can access <a href="http://localhost:8080">http://local
     {
         "cart": [
             {
-                "ID": 3,
-                "UserID": 3,
-                "ProductID": 3,
+                "ID": 1,
                 "User": {
-                    "ID": 0,
-                    "Categories": null,
-                    "Name": "",
-                    "Descriptions": "",
-                    "Quantity": 0,
-                    "Price": 0
+                    "Name": "faishal amrullah",
+                    "Email": "c.faishal.amrullah@gmail.com"
                 },
                 "Product": {
-                    "ID": 0,
-                    "Categories": null,
-                    "Name": "",
-                    "Descriptions": "",
-                    "Quantity": 0,
-                    "Price": 0
+                    "ID": 3,
+                    "Categories": [
+                        {
+                            "ID": 2,
+                            "Name": "sayur",
+                            "Descriptions": "sayur"
+                        }
+                    ],
+                    "Name": "Wortel",
+                    "Descriptions": "Wortel (~0.1 kg)",
+                    "Quantity": 90,
+                    "Price": 1700
                 },
                 "Quantity": 10,
                 "Price": 1700,

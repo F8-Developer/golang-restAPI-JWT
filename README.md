@@ -18,7 +18,7 @@ Build with golang and gin with jwt authentication. It features a simple and bett
 
 * Init workdir
 ```sh
-git clone https://github.com/F-8-Developer/golang-restAPI-JWT.git
+git clone https://github.com/F8-Developer/golang-restAPI-JWT.git
 cd golang-restAPI-JWT
 ```
 
